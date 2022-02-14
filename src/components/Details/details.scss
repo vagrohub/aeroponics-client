@@ -1,0 +1,48 @@
+.details {
+    display: block;
+
+    summary {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 16px;
+        padding: 10px 15px;
+        text-transform: lowercase;
+        color: #fff;
+        cursor: pointer;
+        background-color: #146C43;
+        border-radius: 5px;
+        border: 2px solid #135f3b;
+        user-select: none;
+    }
+
+    .wrapper {
+        margin-top: 20px;
+    }
+
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+    summary::after {
+        content: '\25B6';
+        margin-left: 10px;
+    }
+}
+.details[open] > summary::after {
+    transform: rotate(90deg);
+}
+
+.details:not(.details.details--mobile) {
+    display: inline-block;
+
+    summary {
+        position: relative;
+        padding: 15px 20px;
+        font-size: 18px;
+    }
+
+    .wrapper {
+        position: absolute;
+    }
+}   

@@ -1,0 +1,43 @@
+.main {
+
+    &__row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 0 -20px;
+
+        > * {
+            padding: 0 20px;
+        }
+    }
+
+    &__description {
+        flex: 0 1 450px;
+
+        > * {
+            margin-bottom: 50px;
+        }
+    }
+
+    &__last-update {
+        font-size: 10px;
+        line-height: 12px;
+        text-transform: lowercase;
+        color: rgba(0, 0, 0, 0.83);
+    }
+
+    &__selected-experiment {
+        margin-bottom: 0;
+    }
+
+    p {
+        font-size: 16px;
+    }
+}
+
+.main.main--mobile {
+
+    p {
+        font-size: 14px;
+    }
+}

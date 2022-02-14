@@ -1,0 +1,12 @@
+.navbar {
+
+    > * {
+        margin-left: 20px;
+    }
+}
+.navbar.navbar--mobile {
+
+    > * {
+        margin: 25px 20px;
+    }
+}
