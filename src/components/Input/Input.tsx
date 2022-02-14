@@ -1,3 +1,4 @@
+import { getClassNameWithModifiers } from '../../utils/className';
 import './input.scss';
 
 interface InputProps {
@@ -7,9 +8,12 @@ interface InputProps {
     isMobile: boolean;
 }
 const Input = ({label, placeholder, type, isMobile}: InputProps) => {
-    let className = 'input';
-
-    if (isMobile) className += ' input--mobile'
+    const className = getClassNameWithModifiers({
+        className: 'input',
+        modifiers: [
+            ['input--mobile', isMobile],
+        ]
+    });
 
     return (
         <label className={className}>

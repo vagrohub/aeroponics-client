@@ -1,6 +1,7 @@
 import './greeting.scss'
 import Headline, { Levels } from '../Headline';
 import Container from '../Container';
+import { getClassNameWithModifiers } from '../../utils/className';
 
 interface GreetingProps {
     username: string;
@@ -8,9 +9,12 @@ interface GreetingProps {
 }
 const Greeting = ({ username, windowWidth }: GreetingProps) => {
     const isMobile = windowWidth <= 526;
-    let className = 'greeting';
-
-    if (isMobile) className += ' greeting--mobile';
+    const className = getClassNameWithModifiers({
+        className: 'greeting',
+        modifiers: [
+            ['greeting--mobile', isMobile]
+        ]
+    });
 
     return (
         <div className={className}>

@@ -2,17 +2,20 @@
 
     &__row {
         display: flex;
-        flex-wrap: wrap;
         justify-content: space-between;
         margin: 0 -20px;
 
         > * {
             padding: 0 20px;
         }
+
+        @media (max-width: 1026px) {
+            display: block;
+        }
     }
 
     &__description {
-        flex: 0 1 450px;
+        flex: 0 0 450px;
 
         > * {
             margin-bottom: 50px;
@@ -28,6 +31,14 @@
 
     &__selected-experiment {
         margin-bottom: 0;
+    }
+
+    &__performance-indicators {
+        flex: 1 1 0;
+    }
+
+    &__measurements {
+        margin-top: 50px;
     }
 
     p {

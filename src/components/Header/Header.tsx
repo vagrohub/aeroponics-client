@@ -5,6 +5,7 @@ import Wrapper from '../Wrapper';
 import Icon from '../Icon';
 import Navbar from '../Navbar';
 import Burger from '../Burger';
+import { getClassNameWithModifiers } from '../../utils/className';
 
 
 interface HeaderProps {
@@ -13,17 +14,14 @@ interface HeaderProps {
 }
 const Header = ({ windowWidth, detailsList }: HeaderProps) => {
     const isMobile = windowWidth <= 744;
-    let className = 'header';
-
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-    if (isMobile) className += ' header--mobile';
-    if (isMobile && isMobileMenuOpen) {
-        className += ' header--open-menu';
-        document.body.className = 'open-menu';
-    } else {
-        document.body.className = '';
-    }
+    const className = getClassNameWithModifiers({
+        className: 'header',
+        modifiers: [
+            ['header--mobile', isMobile],
+            ['header--open-menu', isMobile && isMobileMenuOpen]
+        ]
+    });
 
     return (
         <header className={className}>
