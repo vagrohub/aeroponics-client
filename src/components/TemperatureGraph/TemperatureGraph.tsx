@@ -17,7 +17,7 @@ ChartJS.register(
 );
 
 export const options = {
-    responsive: true,
+    responsive: true
 };
 
 interface TemperatureGraphProp {
@@ -32,7 +32,7 @@ const TemperatureGraph = ({ temperatures, label }: TemperatureGraphProp) => {
                 label: label,
                 data: temperatures.map(temperature => temperature.value),
             }
-        ],
+        ]
     }
 
     return (

@@ -6,12 +6,16 @@ interface SimpleButtonProps {
     isDisabled: boolean;
     isFill: boolean;
     value: string;
+    text: string;
+    onClick: Function;
 }
 const SimpleButton = ({
     isMobile,
     isDisabled,
     isFill,
-    value
+    value,
+    text,
+    onClick
 }: SimpleButtonProps) => {
     const className = getClassNameWithModifiers({
         className: 'simple-button',
@@ -22,8 +26,13 @@ const SimpleButton = ({
     });
 
     return (
-        <button className={className} disabled={isDisabled}>
-            {value}
+        <button
+            className={className}
+            disabled={isDisabled}
+            onClick={(event) => onClick(event)}
+            value={value}
+        >
+            {text}
         </button>
     );
 };

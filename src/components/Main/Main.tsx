@@ -2,9 +2,10 @@ import './main.scss'
 import { MainProps } from './interfaces';
 import Container from '../Container';
 import Headline, { Levels } from '../Headline';
-import TemperatureGraph from '../TemperatureGraph';
+import TemperatureChart from '../TemperatureChart';
 import { getTimeElapsedSince } from '../../utils/date';
 import { getClassNameWithModifiers } from '../../utils/className';
+import { execTemperatureFromMeasurements } from './utils';
 
 const Main = ({ user, windowWidth }: MainProps) => {
     const isMobile = windowWidth <= 526;
@@ -17,17 +18,11 @@ const Main = ({ user, windowWidth }: MainProps) => {
     let selectedDevice = user.deviceList[user.deviceList.length - 1];
     let selectedExperiment = selectedDevice.currentExperiment;
 
+    const {
+        tempWater,
+        tempRoom
+    } = execTemperatureFromMeasurements(selectedExperiment.measurements);
     const lastUpdate = getTimeElapsedSince(selectedExperiment.lastUpdate);
-    const temperatures = selectedExperiment.measurements.map(measurement => {
-        return {
-            value: measurement.tempWater,
-            date: measurement.date
-        }
-    })
-
-    const temperatureGraph = isMobile
-        ? null
-        : <TemperatureGraph label='Вода ' temperatures={temperatures} />
 
     return (
         <main className={className}>
@@ -58,7 +53,7 @@ const Main = ({ user, windowWidth }: MainProps) => {
                             />
 
                             <p>{selectedExperiment.description}</p>
-                        </div>                    
+                        </div>
                     </div>
 
                     <div className='main__performance-indicators'>
@@ -70,7 +65,35 @@ const Main = ({ user, windowWidth }: MainProps) => {
                         />
 
                         <div className='main__measurements'>
-                            {temperatureGraph}
+                            <div className='main__temperature-chart'>
+                                <TemperatureChart
+                                    tempWater={tempWater}
+                                    tempRoom={tempRoom}
+                                />
+                            </div>
+
+                            <div className='main__indicators'>
+                                <Headline
+                                    level={Levels.Third}
+                                    isMobile={isMobile}
+                                    value='показатели'
+                                />
+
+                                <div className='main__block-info'>
+
+                                </div>
+                            </div>
+                            <div className='main__report'>
+                                <Headline
+                                    level={Levels.Third}
+                                    isMobile={isMobile}
+                                    value='отчет'
+                                />
+
+                                <div className='main__block-info'>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
