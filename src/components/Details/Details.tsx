@@ -1,5 +1,6 @@
 import './details.scss';
 import Wrapper from '../Wrapper';
+import { getClassNameWithModifiers } from '../../utils/className';
 
 interface DetailsProps {
     summary: string;
@@ -7,9 +8,12 @@ interface DetailsProps {
     render: Function;
 }
 const Details = ({ summary, render, isMobile }: DetailsProps) => {
-    let className = 'details';
-
-    if (isMobile) className += ' details--mobile';
+    const className = getClassNameWithModifiers({
+        className: 'details',
+        modifiers: [
+            ['details--mobile', isMobile]
+        ]
+    });
 
     return (
         <details className={className}>

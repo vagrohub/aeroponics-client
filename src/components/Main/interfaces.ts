@@ -1,7 +1,19 @@
+interface Measurement {
+    danger: boolean,
+    tempRoom: number,
+    tempWater: number,
+    lightSensor: number,
+    lightWorkingTime: number,
+    lightOffTime: Date,
+    pumpTime: number,
+    pumpSleep: number,
+    date: Date
+}
+
 interface Experimet {
     title: string;
     description: string;
-    measurements: any[];
+    measurements: Measurement[];
     lastUpdate: Date;
 }
 
@@ -28,5 +40,6 @@ export type {
     Experimet,
     Device,
     User,
-    MainProps
+    MainProps,
+    Measurement
 }

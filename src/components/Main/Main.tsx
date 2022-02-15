@@ -2,17 +2,32 @@ import './main.scss'
 import { MainProps } from './interfaces';
 import Container from '../Container';
 import Headline, { Levels } from '../Headline';
+import Measurements from '../Measurements';
+import { getTimeElapsedSince } from '../../utils/date';
+import { getClassNameWithModifiers } from '../../utils/className';
 
 const Main = ({ user, windowWidth }: MainProps) => {
     const isMobile = windowWidth <= 526;
-    let className = 'main';
+    const className = getClassNameWithModifiers({
+        className: 'main',
+        modifiers: [
+            ['main--mobile', isMobile],
+        ]
+    });
     let selectedDevice = user.deviceList[user.deviceList.length - 1];
     let selectedExperiment = selectedDevice.currentExperiment;
 
-    if (isMobile) className += ' main--mobile';
+    const lastUpdate = getTimeElapsedSince(selectedExperiment.lastUpdate);
+    const temperatures = selectedExperiment.measurements.map(measurement => {
+        return {
+            value: measurement.tempWater,
+            date: measurement.date
+        }
+    })
 
-    const lastUpdateMs = Date.now() - selectedExperiment.lastUpdate.getTime();
-    const lastUpdateMinue = Math.round(lastUpdateMs / 60_000);
+    const measurements = isMobile
+        ? null
+        : <Measurements temperatures={temperatures} />
 
     return (
         <main className={className}>
@@ -20,7 +35,7 @@ const Main = ({ user, windowWidth }: MainProps) => {
                 <div className='main__row'>
                     <div className='main__description'>
                         <p className='main__last-update'>
-                            {`последнее обновление ${lastUpdateMinue} минут назад`}
+                            {`последнее обновление ${lastUpdate} минут назад`}
                         </p>
 
                         <div className='main__selected-device'>
@@ -54,7 +69,9 @@ const Main = ({ user, windowWidth }: MainProps) => {
                             value='Показатели работы'
                         />
 
-                        
+                        <div className='main__measurements'>
+                            {measurements}
+                        </div>
                     </div>
                 </div>
             </Container>

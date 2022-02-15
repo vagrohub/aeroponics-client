@@ -1,4 +1,5 @@
 import React from 'react';
+import { getClassNameWithModifiers } from '../../utils/className';
 import './wrapper.scss';
 
 interface WrapperProps {
@@ -6,9 +7,12 @@ interface WrapperProps {
     children: React.ReactElement[] | React.ReactElement
 }
 const Wrapper = ({isBoxSchadow, children}: WrapperProps) => {
-    let className = 'wrapper';
-
-    if (isBoxSchadow) className += ' wrapper--with-schadow'
+    const className = getClassNameWithModifiers({
+        className: 'wrapper',
+        modifiers: [
+            ['wrapper--with-schadow', isBoxSchadow]
+        ]
+    });
 
     return (
         <div className={className}>

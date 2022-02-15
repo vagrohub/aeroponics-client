@@ -1,3 +1,4 @@
+import { getClassNameWithModifiers } from '../../utils/className';
 import './icon.scss';
 
 interface IconProps {
@@ -10,9 +11,12 @@ const Icon = ({
     isMobile,
     alt
 }: IconProps) => {
-    let className = 'icon';
-
-    if (isMobile) className += ' icon--mobile'
+    const className = getClassNameWithModifiers({
+        className: 'icon',
+        modifiers: [
+            ['icon--mobile', isMobile],
+        ]
+    });
 
     return (
         <span className={className}>

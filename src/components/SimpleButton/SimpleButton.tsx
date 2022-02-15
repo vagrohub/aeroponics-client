@@ -1,3 +1,4 @@
+import { getClassNameWithModifiers } from '../../utils/className';
 import './simpleButton.scss';
 
 interface SimpleButtonProps {
@@ -12,10 +13,13 @@ const SimpleButton = ({
     isFill,
     value
 }: SimpleButtonProps) => {
-    let className = 'simple-button';
-
-    if (isMobile) className += ' simple-button--mobile';
-    if (isFill) className += ' simple-button--fill';
+    const className = getClassNameWithModifiers({
+        className: 'simple-button',
+        modifiers: [
+            ['simple-button--mobile', isMobile],
+            ['simple-button--fill', isFill],
+        ]
+    });
 
     return (
         <button className={className} disabled={isDisabled}>

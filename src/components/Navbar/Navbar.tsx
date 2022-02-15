@@ -1,3 +1,4 @@
+import { getClassNameWithModifiers } from '../../utils/className';
 import Details from '../Details';
 import './navbar.scss';
 
@@ -6,9 +7,12 @@ interface NavbarProps {
     isMobile: boolean;
 }
 const Navbar = ({ detailsList, isMobile }: NavbarProps) => {
-    let className = 'navbar';
-
-    if (isMobile) className += ' navbar--mobile'; 
+    const className = getClassNameWithModifiers({
+        className: 'navbar',
+        modifiers: [
+            ['navbar--mobile', isMobile],
+        ]
+    });
 
     return (
         <nav className={className}>

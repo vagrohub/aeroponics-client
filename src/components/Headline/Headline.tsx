@@ -1,3 +1,4 @@
+import { getClassNameWithModifiers } from '../../utils/className';
 import Icon from '../Icon';
 import './headline.scss';
 
@@ -24,13 +25,16 @@ const Headline = ({
         [Levels.Second]: <h2>{value}</h2>,
         [Levels.Third]: <h3>{value}</h3>,
     };
-    let classNamesHeadline = 'headline';
-
-    if (img) classNamesHeadline += ' headline--with-icon';
-    if (isMobile) classNamesHeadline += ' headline--mobile';
+    const className = getClassNameWithModifiers({
+        className: 'headline',
+        modifiers: [
+            ['headline--mobile', isMobile],
+            ['headline--with-icon', Boolean(img)]
+        ]
+    });
 
     return (
-        <div className={classNamesHeadline}>
+        <div className={className}>
             {img ? <Icon isMobile={isMobile} img={img} alt={value} /> : null}
             {headlineMap[level]}
         </div>

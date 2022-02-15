@@ -1,3 +1,4 @@
+import { getClassNameWithModifiers } from '../../utils/className';
 import './slashButton.scss';
 
 interface SlashButtonProps {
@@ -6,7 +7,12 @@ interface SlashButtonProps {
 	value: string;
 }
 const SlashButton = ({ isMobile, isDisabled, value }: SlashButtonProps) => {
-	const className = `slash-button${isMobile ? ' slash-button--mobile' : ''}`;
+	const className = getClassNameWithModifiers({
+        className: 'slash-button',
+        modifiers: [
+            ['slash-button--mobile', isMobile]
+        ]
+    });
 
 	return (
 		<button className={className} disabled={isDisabled}>
