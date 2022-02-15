@@ -3,6 +3,7 @@ import { MainProps } from './interfaces';
 import Container from '../Container';
 import Headline, { Levels } from '../Headline';
 import TemperatureChart from '../TemperatureChart';
+import Indicators from '../Indicators';
 import { getTimeElapsedSince } from '../../utils/date';
 import { getClassNameWithModifiers } from '../../utils/className';
 import { execTemperatureFromMeasurements } from './utils';
@@ -15,8 +16,11 @@ const Main = ({ user, windowWidth }: MainProps) => {
             ['main--mobile', isMobile],
         ]
     });
+
     let selectedDevice = user.deviceList[user.deviceList.length - 1];
     let selectedExperiment = selectedDevice.currentExperiment;
+    let lastMeasurementExperiment = selectedExperiment
+        .measurements[selectedExperiment.measurements.length - 1];
 
     const {
         tempWater,
@@ -80,7 +84,13 @@ const Main = ({ user, windowWidth }: MainProps) => {
                                 />
 
                                 <div className='main__block-info'>
-
+                                    <Indicators
+                                        tempWater={lastMeasurementExperiment.tempWater}
+                                        tempRoom={lastMeasurementExperiment.tempRoom}
+                                        lightOffTime={lastMeasurementExperiment.lightOffTime}
+                                        lightWorkingTime={lastMeasurementExperiment.lightWorkingTime}
+                                        isError={lastMeasurementExperiment.danger}                                        
+                                    />
                                 </div>
                             </div>
                             <div className='main__report'>

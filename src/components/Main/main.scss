@@ -35,10 +35,20 @@
 
     &__performance-indicators {
         flex: 1 1 0;
+        max-height: calc(100vh - 220px);
+        overflow-y: auto;
+        padding-right: 30px;
     }
 
     &__measurements {
         margin-top: 50px;
+        display: grid;
+        grid-template: repeat(2, auto) / repeat(2, 1fr);
+        grid-gap: 30px;
+    }
+
+    &__temperature-chart {
+        grid-column: 1 / 3;
     }
 
     p {
@@ -47,6 +57,11 @@
 }
 
 .main.main--mobile {
+
+    .main__performance-indicators {
+        max-height: auto;
+        overflow: visible;
+    }
 
     p {
         font-size: 14px;
