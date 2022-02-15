@@ -6,7 +6,7 @@ import {
     LineElement
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import './measurements.scss';
+import './temperatureGraph.scss';
 import Wrapper from '../Wrapper';
 
 ChartJS.register(
@@ -20,32 +20,31 @@ export const options = {
     responsive: true,
 };
 
-interface MeasurementsProp {
+interface TemperatureGraphProp {
+    label: string;
     temperatures: {value: number, date: Date}[];
 }
-const Measurements = ({ temperatures }: MeasurementsProp) => {
+const TemperatureGraph = ({ temperatures, label }: TemperatureGraphProp) => {
     const data = {
         labels: temperatures.map(temperature => temperature.date.toLocaleDateString()),
         datasets: [
             {
-                label: 'Вода',
+                label: label,
                 data: temperatures.map(temperature => temperature.value),
             }
         ],
     }
 
     return (
-        <div className='measurements'>
-            <div className='measurements__temperature'>
-                <Wrapper isBoxSchadow={true}>
-                    <Line
-                        data={data}
-                        options={options}
-                    />
-                </Wrapper>
-            </div>
+        <div className='temperature-graph'>
+            <Wrapper isBoxSchadow={true}>
+                <Line
+                    data={data}
+                    options={options}
+                />
+            </Wrapper>
         </div>
     );
 };
 
-export default Measurements;
+export default TemperatureGraph;

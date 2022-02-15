@@ -2,7 +2,7 @@ import './main.scss'
 import { MainProps } from './interfaces';
 import Container from '../Container';
 import Headline, { Levels } from '../Headline';
-import Measurements from '../Measurements';
+import TemperatureGraph from '../TemperatureGraph';
 import { getTimeElapsedSince } from '../../utils/date';
 import { getClassNameWithModifiers } from '../../utils/className';
 
@@ -25,9 +25,9 @@ const Main = ({ user, windowWidth }: MainProps) => {
         }
     })
 
-    const measurements = isMobile
+    const temperatureGraph = isMobile
         ? null
-        : <Measurements temperatures={temperatures} />
+        : <TemperatureGraph label='Вода ' temperatures={temperatures} />
 
     return (
         <main className={className}>
@@ -70,7 +70,7 @@ const Main = ({ user, windowWidth }: MainProps) => {
                         />
 
                         <div className='main__measurements'>
-                            {measurements}
+                            {temperatureGraph}
                         </div>
                     </div>
                 </div>
