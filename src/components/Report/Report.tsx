@@ -1,10 +1,21 @@
+import { getClassNameWithModifiers } from '../../utils/className';
 import GroupList from '../GroupList';
 import Wrapper from '../Wrapper';
 import './report.scss';
 
-const Report = () => {
+interface ReportProps {
+    isMobile: boolean;
+}
+const Report = ({ isMobile }: ReportProps) => {
+    const className = getClassNameWithModifiers({
+        className: 'report',
+        modifiers: [
+            ['report--mobile', isMobile]
+        ]
+    });
+
     return (
-        <div className='report'>
+        <div className={className}>
             <Wrapper isBoxSchadow={true}>
                 <GroupList
                     list={[

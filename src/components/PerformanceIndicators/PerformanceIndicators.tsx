@@ -57,12 +57,8 @@ const PerformanceIndicators = ({ currentExperiment, isMobile }: PerformanceIndic
                         render={() => {
                             return (
                                 <Indicators
-                                    tempWater={lastMeasurementExperiment.tempWater}
-                                    tempRoom={lastMeasurementExperiment.tempRoom}
-                                    lightOffTime={lastMeasurementExperiment.lightOffTime}
-                                    lightWorkingTime={lastMeasurementExperiment.lightWorkingTime}
-                                    isError={lastMeasurementExperiment.danger}
                                     isMobile={isMobile}
+                                    lastMeasurementExperiment={lastMeasurementExperiment}
                                 />
                             );
                         }}
@@ -73,7 +69,9 @@ const PerformanceIndicators = ({ currentExperiment, isMobile }: PerformanceIndic
                         isMobile={isMobile}
                         render={() => {
                             return (
-                                <Report />
+                                <Report
+                                    isMobile={isMobile}
+                                />
                             );
                         }}
                     />

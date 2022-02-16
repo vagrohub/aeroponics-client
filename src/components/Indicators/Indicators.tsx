@@ -1,6 +1,7 @@
 import './indicators.scss'
 import GroupList from '../GroupList';
 import Wrapper from '../Wrapper';
+import { Measurement } from '../Main/interfaces';
 import { getClassNameWithModifiers } from '../../utils/className';
 
 const getIndicatorRow = (label: string, value: string) => {
@@ -13,23 +14,15 @@ const getIndicatorRow = (label: string, value: string) => {
 };
 
 interface IndicatorsProps {
-    tempWater: number;
-    tempRoom: number;
-    lightOffTime: Date;
-    lightWorkingTime: number;
-    isError: boolean;
+    lastMeasurementExperiment: Measurement;
     isMobile: boolean;
 
 }
 const Indicators = ({
-    tempWater,
-    tempRoom,
-    lightOffTime,
-    lightWorkingTime,
-    isError,
+    lastMeasurementExperiment,
     isMobile
 }: IndicatorsProps) => {
-    const lightOnTime = new Date(lightOffTime.getTime() - lightWorkingTime)
+    const lightOnTime = new Date(lastMeasurementExperiment.lightOffTime.getTime() - lastMeasurementExperiment.lightWorkingTime)
         .toLocaleDateString();
     const className = getClassNameWithModifiers({
         className: 'indicators',
@@ -44,14 +37,14 @@ const Indicators = ({
                 <GroupList
                     list={[
                         [
-                            getIndicatorRow('Температура воздуха', `${tempWater}`),
-                            getIndicatorRow('Температура комнаты', `${tempRoom}`)
+                            getIndicatorRow('Температура воздуха', `${lastMeasurementExperiment.tempWater}`),
+                            getIndicatorRow('Температура комнаты', `${lastMeasurementExperiment.tempRoom}`)
                         ],
                         [
                             getIndicatorRow('Время влючения света', lightOnTime)
                         ],
                         [
-                            getIndicatorRow('Ошибки', `${isError ? 'Да' : 'Нет'}`)
+                            getIndicatorRow('Ошибки', `${lastMeasurementExperiment.danger ? 'Да' : 'Нет'}`)
                         ]
                     ]}
                 />
