@@ -2,7 +2,12 @@
     height: 100%;
 
     &__main {
-        padding: 70px 0px;
+        padding: clamp(80px, 15vw, 130px) 0px 70px 0;
         max-height: 100%;
+    }
+
+    header {
+        position: fixed;
+        width: 100%;
     }
 }

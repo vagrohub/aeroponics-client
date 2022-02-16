@@ -1,0 +1,30 @@
+.performance-indicators {
+
+    &__measurements {
+        margin-top: 50px;
+        
+    }
+
+    &__temperature-chart {
+        
+    }
+
+    &__row {
+        display: flex;
+        gap: 20px;
+
+        > * {
+            flex: 1 1 0;
+        }
+
+        & + & {
+            margin-top: 30px;
+        }
+    }
+}
+.performance-indicators.performance-indicators--mobile {
+
+    .performance-indicators__measurements {
+        grid-template: repeat(3, auto) / repeat(1, 1fr);
+    }
+}
