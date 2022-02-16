@@ -2,11 +2,11 @@ import './main.scss'
 import { MainProps } from './interfaces';
 import Container from '../Container';
 import Headline, { Levels } from '../Headline';
+import LastUpdate from '../LastUpdate';
 import Info from '../Info';
 import TemperatureChart from '../TemperatureChart';
 import Indicators from '../Indicators';
 import Report from '../Report';
-import { getTimeElapsedSince } from '../../utils/date';
 import { getClassNameWithModifiers } from '../../utils/className';
 import { execTemperatureFromMeasurements } from './utils';
 import Wrapper from '../Wrapper';
@@ -29,16 +29,17 @@ const Main = ({ user, windowWidth }: MainProps) => {
         tempWater,
         tempRoom
     } = execTemperatureFromMeasurements(selectedExperiment.measurements);
-    const lastUpdate = getTimeElapsedSince(selectedExperiment.lastUpdate);
 
     return (
         <main className={className}>
             <Container>
                 <div className='main__row'>
                     <div className='main__description'>
-                        <p className='main__last-update'>
-                            {`последнее обновление ${lastUpdate} минут назад`}
-                        </p>
+                        <div className='main__last-update'>
+                            <LastUpdate
+                                dateLastUpdate={selectedExperiment.lastUpdate}
+                            />
+                        </div>
 
                         <div className='main__selected-device'>
                             <Info
