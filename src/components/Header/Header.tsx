@@ -5,7 +5,7 @@ import Wrapper from '../Wrapper';
 import Icon from '../Icon';
 import Navbar from '../Navbar';
 import Burger from '../Burger';
-import { getClassNameWithModifiers } from '../../utils/className';
+import { getClassNameWithModifiers, toggleBodyClass } from '../../utils/className';
 
 interface HeaderProps {
     windowWidth: number;
@@ -21,6 +21,11 @@ const Header = ({ windowWidth, detailsList }: HeaderProps) => {
             ['header--open-menu', isMobile && isMobileMenuOpen]
         ]
     });
+
+    const onBurgerClickHandler = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+        toggleBodyClass('body--overflow');
+    }
 
     return (
         <header className={className}>
@@ -41,7 +46,7 @@ const Header = ({ windowWidth, detailsList }: HeaderProps) => {
                         <div className='header__burger'>
                             <Burger
                                 isOpen={isMobileMenuOpen}
-                                onClickHandler={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                onClickHandler={onBurgerClickHandler}
                             />
                         </div>
                     </div>
