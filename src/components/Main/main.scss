@@ -23,7 +23,7 @@
     }
 
     &__last-update {
-        font-size: 10px;
+        font-size: 14px;
         line-height: 12px;
         text-transform: lowercase;
         color: rgba(0, 0, 0, 0.83);
@@ -57,14 +57,6 @@
     &__block-info {
         margin-top: 10px;
     }
-
-    p {
-        font-size: 16px;
-
-        &::first-letter {
-            text-transform: uppercase;
-        }
-    }
 }
 
 .main.main--mobile {
@@ -72,9 +64,5 @@
     .main__performance-indicators {
         max-height: auto;
         overflow: visible;
-    }
-
-    p {
-        font-size: 14px;
     }
 }

@@ -62,7 +62,7 @@ const user: User = {
                     date: new Date(2022, 1, 14, 15),
                 },
             ],
-            lastUpdate: new Date(2022, 1, 10)
+            lastUpdate: new Date(2022, 1, 16)
         }
     }]
 };

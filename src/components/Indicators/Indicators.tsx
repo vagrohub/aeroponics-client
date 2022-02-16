@@ -39,7 +39,7 @@ const Indicators = ({
     })
 
     return (
-        <div className='indicators'>
+        <div className={className}>
             <Wrapper isBoxSchadow={true}>
                 <GroupList
                     list={[

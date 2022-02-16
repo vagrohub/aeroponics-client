@@ -2,6 +2,7 @@ import './main.scss'
 import { MainProps } from './interfaces';
 import Container from '../Container';
 import Headline, { Levels } from '../Headline';
+import Info from '../Info';
 import TemperatureChart from '../TemperatureChart';
 import Indicators from '../Indicators';
 import Report from '../Report';
@@ -40,25 +41,21 @@ const Main = ({ user, windowWidth }: MainProps) => {
                         </p>
 
                         <div className='main__selected-device'>
-                            <Headline
+                            <Info
                                 img={require('./device.png')}
-                                level={Levels.Second}
+                                title={selectedDevice.name}
+                                description={selectedDevice.description}
                                 isMobile={isMobile}
-                                value={selectedDevice.name}
                             />
-
-                            <p>{selectedDevice.description}</p>
                         </div>
 
                         <div className='main__selected-experiment'>
-                            <Headline
+                            <Info
                                 img={require('./experiment.png')}
-                                level={Levels.Second}
+                                title={selectedExperiment.title}
+                                description={selectedExperiment.description}
                                 isMobile={isMobile}
-                                value={selectedExperiment.title}
                             />
-
-                            <p>{selectedExperiment.description}</p>
                         </div>
                     </div>
 
