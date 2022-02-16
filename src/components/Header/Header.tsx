@@ -7,7 +7,6 @@ import Navbar from '../Navbar';
 import Burger from '../Burger';
 import { getClassNameWithModifiers } from '../../utils/className';
 
-
 interface HeaderProps {
     windowWidth: number;
     detailsList: {summary: string, render: Function}[];

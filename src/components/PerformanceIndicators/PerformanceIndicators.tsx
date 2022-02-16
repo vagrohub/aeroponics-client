@@ -2,7 +2,7 @@ import Headline, { Levels } from '../Headline';
 import Indicators from '../Indicators';
 import Report from '../Report';
 import TemperatureChart from '../TemperatureChart';
-import Wrapper from '../Wrapper';
+import CardInfo from '../CardInfo';
 import { Experimet } from '../Main/interfaces';
 import './performanceIndicators.scss';
 import { execTemperatureFromMeasurements } from '../Main/utils';
@@ -51,39 +51,32 @@ const PerformanceIndicators = ({ currentExperiment, isMobile }: PerformanceIndic
                     {temperatureChart}
                 </div>
                 <div className='performance-indicators__row'>
-                    <div className='performance-indicators__indicators'>
-                        <Wrapper isBoxSchadow={true}>
-                            <Headline
-                                level={Levels.Third}
-                                isMobile={isMobile}
-                                value='показатели'
-                            />
-                        </Wrapper>
+                    <CardInfo
+                        title='Показатели'
+                        isMobile={isMobile}
+                        render={() => {
+                            return (
+                                <Indicators
+                                    tempWater={lastMeasurementExperiment.tempWater}
+                                    tempRoom={lastMeasurementExperiment.tempRoom}
+                                    lightOffTime={lastMeasurementExperiment.lightOffTime}
+                                    lightWorkingTime={lastMeasurementExperiment.lightWorkingTime}
+                                    isError={lastMeasurementExperiment.danger}
+                                    isMobile={isMobile}
+                                />
+                            );
+                        }}
+                    />
 
-                        <div className='performance-indicators__block-info'>
-                            <Indicators
-                                tempWater={lastMeasurementExperiment.tempWater}
-                                tempRoom={lastMeasurementExperiment.tempRoom}
-                                lightOffTime={lastMeasurementExperiment.lightOffTime}
-                                lightWorkingTime={lastMeasurementExperiment.lightWorkingTime}
-                                isError={lastMeasurementExperiment.danger}
-                                isMobile={isMobile}
-                            />
-                        </div>
-                    </div>
-                    <div className='performance-indicators__report'>
-                        <Wrapper isBoxSchadow={true}>
-                            <Headline
-                                level={Levels.Third}
-                                isMobile={isMobile}
-                                value='Отчет'
-                            />
-                        </Wrapper>
-
-                        <div className='performance-indicators__block-info'>
-                            <Report />
-                        </div>
-                    </div>
+                    <CardInfo
+                        title='Отчет'
+                        isMobile={isMobile}
+                        render={() => {
+                            return (
+                                <Report />
+                            );
+                        }}
+                    />
                 </div>
             </div>
         </section>
