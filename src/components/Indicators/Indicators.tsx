@@ -1,5 +1,7 @@
 import './indicators.scss'
 import GroupList from '../GroupList';
+import Wrapper from '../Wrapper';
+import { getClassNameWithModifiers } from '../../utils/className';
 
 const getIndicatorRow = (label: string, value: string) => {
     return (
@@ -16,6 +18,7 @@ interface IndicatorsProps {
     lightOffTime: Date;
     lightWorkingTime: number;
     isError: boolean;
+    isMobile: boolean;
 
 }
 const Indicators = ({
@@ -23,27 +26,36 @@ const Indicators = ({
     tempRoom,
     lightOffTime,
     lightWorkingTime,
-    isError
+    isError,
+    isMobile
 }: IndicatorsProps) => {
     const lightOnTime = new Date(lightOffTime.getTime() - lightWorkingTime)
         .toLocaleDateString();
+    const className = getClassNameWithModifiers({
+        className: 'indicators',
+        modifiers: [
+            ['indicators--mobile', isMobile]
+        ]
+    })
 
     return (
         <div className='indicators'>
-            <GroupList
-                list={[
-                    [
-                        getIndicatorRow('Температура воздуха', `${tempWater}`),
-                        getIndicatorRow('Температура комнаты', `${tempRoom}`)
-                    ],
-                    [
-                        getIndicatorRow('Время влючения света', lightOnTime)
-                    ],
-                    [
-                        getIndicatorRow('ошибки', `${isError ? 'Да' : 'Нет'}`)
-                    ]
-                ]}
-            />
+            <Wrapper isBoxSchadow={true}>
+                <GroupList
+                    list={[
+                        [
+                            getIndicatorRow('Температура воздуха', `${tempWater}`),
+                            getIndicatorRow('Температура комнаты', `${tempRoom}`)
+                        ],
+                        [
+                            getIndicatorRow('Время влючения света', lightOnTime)
+                        ],
+                        [
+                            getIndicatorRow('Ошибки', `${isError ? 'Да' : 'Нет'}`)
+                        ]
+                    ]}
+                />
+            </Wrapper>
         </div>
     );
 };

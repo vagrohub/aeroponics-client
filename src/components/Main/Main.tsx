@@ -4,9 +4,11 @@ import Container from '../Container';
 import Headline, { Levels } from '../Headline';
 import TemperatureChart from '../TemperatureChart';
 import Indicators from '../Indicators';
+import Report from '../Report';
 import { getTimeElapsedSince } from '../../utils/date';
 import { getClassNameWithModifiers } from '../../utils/className';
 import { execTemperatureFromMeasurements } from './utils';
+import Wrapper from '../Wrapper';
 
 const Main = ({ user, windowWidth }: MainProps) => {
     const isMobile = windowWidth <= 526;
@@ -77,11 +79,13 @@ const Main = ({ user, windowWidth }: MainProps) => {
                             </div>
 
                             <div className='main__indicators'>
-                                <Headline
-                                    level={Levels.Third}
-                                    isMobile={isMobile}
-                                    value='показатели'
-                                />
+                                <Wrapper isBoxSchadow={true}>
+                                    <Headline
+                                        level={Levels.Third}
+                                        isMobile={isMobile}
+                                        value='показатели'
+                                    />
+                                </Wrapper>
 
                                 <div className='main__block-info'>
                                     <Indicators
@@ -89,19 +93,22 @@ const Main = ({ user, windowWidth }: MainProps) => {
                                         tempRoom={lastMeasurementExperiment.tempRoom}
                                         lightOffTime={lastMeasurementExperiment.lightOffTime}
                                         lightWorkingTime={lastMeasurementExperiment.lightWorkingTime}
-                                        isError={lastMeasurementExperiment.danger}                                        
+                                        isError={lastMeasurementExperiment.danger}
+                                        isMobile={isMobile}
                                     />
                                 </div>
                             </div>
                             <div className='main__report'>
-                                <Headline
-                                    level={Levels.Third}
-                                    isMobile={isMobile}
-                                    value='отчет'
-                                />
+                                <Wrapper isBoxSchadow={true}>
+                                    <Headline
+                                        level={Levels.Third}
+                                        isMobile={isMobile}
+                                        value='Отчет'
+                                    />
+                                </Wrapper>
 
                                 <div className='main__block-info'>
-
+                                    <Report />
                                 </div>
                             </div>
                         </div>
