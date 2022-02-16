@@ -2,8 +2,7 @@ import './main.scss'
 import { MainProps } from './interfaces';
 import Container from '../Container';
 import Headline, { Levels } from '../Headline';
-import LastUpdate from '../LastUpdate';
-import Info from '../Info';
+import Desciption from '../Desciption';
 import TemperatureChart from '../TemperatureChart';
 import Indicators from '../Indicators';
 import Report from '../Report';
@@ -35,29 +34,11 @@ const Main = ({ user, windowWidth }: MainProps) => {
             <Container>
                 <div className='main__row'>
                     <div className='main__description'>
-                        <div className='main__last-update'>
-                            <LastUpdate
-                                dateLastUpdate={selectedExperiment.lastUpdate}
-                            />
-                        </div>
-
-                        <div className='main__selected-device'>
-                            <Info
-                                img={require('./device.png')}
-                                title={selectedDevice.name}
-                                description={selectedDevice.description}
-                                isMobile={isMobile}
-                            />
-                        </div>
-
-                        <div className='main__selected-experiment'>
-                            <Info
-                                img={require('./experiment.png')}
-                                title={selectedExperiment.title}
-                                description={selectedExperiment.description}
-                                isMobile={isMobile}
-                            />
-                        </div>
+                        <Desciption
+                            selectedDevice={selectedDevice}
+                            selectedExperiment={selectedExperiment}
+                            isMobile={isMobile}
+                        />
                     </div>
 
                     <div className='main__performance-indicators'>

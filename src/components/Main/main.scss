@@ -16,14 +16,6 @@
 
     &__description {
         flex: 0 0 450px;
-
-        > * {
-            margin-bottom: 50px;
-        }
-    }
-
-    &__selected-experiment {
-        margin-bottom: 0;
     }
 
     &__performance-indicators {
