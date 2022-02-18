@@ -18,28 +18,28 @@ const Desciption = ({
     return (
         <section className='desciption'>
             <div className='desciption__last-update'>
-                    <LastUpdate
-                        dateLastUpdate={selectedExperiment.lastUpdate}
-                    />
-                </div>
+                <LastUpdate
+                    dateLastUpdate={selectedExperiment.lastUpdate}
+                />
+            </div>
 
-                <div className='desciption__selected-device'>
-                    <Info
-                        img={require('./device.png')}
-                        title={selectedDevice.name}
-                        description={selectedDevice.description}
-                        isMobile={isMobile}
-                    />
-                </div>
+            <div className='desciption__selected-device'>
+                <Info
+                    img={require('./device.png')}
+                    title={selectedDevice.name}
+                    description={selectedDevice.description}
+                    isMobile={isMobile}
+                />
+            </div>
 
-                <div className='desciption__selected-experiment'>
-                    <Info
-                        img={require('./experiment.png')}
-                        title={selectedExperiment.title}
-                        description={selectedExperiment.description}
-                        isMobile={isMobile}
-                    />
-                </div>
+            <div className='desciption__selected-experiment'>
+                <Info
+                    img={require('./experiment.png')}
+                    title={selectedExperiment.title}
+                    description={selectedExperiment.description}
+                    isMobile={isMobile}
+                />
+            </div>
         </section>
     );
 };

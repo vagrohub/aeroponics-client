@@ -4,7 +4,7 @@ import './container.scss';
 interface ContainerProps {
     children: React.ReactElement[] | React.ReactElement
 }
-const Container = ({children}: ContainerProps) => {
+const Container = ({ children }: ContainerProps) => {
     return (
         <div className='container'>
             {children}

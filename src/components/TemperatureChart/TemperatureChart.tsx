@@ -15,11 +15,7 @@ interface TemperatureChartProps {
 }
 const TemperatureChart = ({ tempRoom, tempWater }: TemperatureChartProps) => {
     const [show, setShow] = useState('Вода');
-
-    let showTemperatures: Temperture[];
-
-    if (show === 'Вода') showTemperatures = tempWater;
-    else showTemperatures = tempRoom;
+    let showTemperatures = show === 'Вода' ? tempWater : tempRoom
 
     const onSimpleButtonHandler = (event: any) => {
         setShow(event.currentTarget.value);
@@ -28,7 +24,7 @@ const TemperatureChart = ({ tempRoom, tempWater }: TemperatureChartProps) => {
     return (
         <div className='temperature-chart'>
             <div className='temperature-chart__header'>
-                <Wrapper isBoxSchadow={true}>
+                <Wrapper isBoxSchadow>
                     <div className='temperature-chart__title'>
                         <Headline
                             level={Levels.Third}

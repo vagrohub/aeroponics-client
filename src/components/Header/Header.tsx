@@ -1,15 +1,18 @@
 import { useState } from 'react';
-import './header.scss';
+import {
+    getClassNameWithModifiers,
+    toggleBodyClass
+} from '../../utils/className';
 import Container from '../Container';
 import Wrapper from '../Wrapper';
 import Icon from '../Icon';
 import Navbar from '../Navbar';
 import Burger from '../Burger';
-import { getClassNameWithModifiers, toggleBodyClass } from '../../utils/className';
+import './header.scss';
 
 interface HeaderProps {
     windowWidth: number;
-    detailsList: {summary: string, render: Function}[];
+    detailsList: { summary: string, render: Function }[];
 }
 const Header = ({ windowWidth, detailsList }: HeaderProps) => {
     const isMobile = windowWidth <= 744;
@@ -29,7 +32,7 @@ const Header = ({ windowWidth, detailsList }: HeaderProps) => {
 
     return (
         <header className={className}>
-            <Wrapper isBoxSchadow={true}>
+            <Wrapper isBoxSchadow>
                 <Container>
                     <div className='header__row'>
                         <div className='header__logotype'>

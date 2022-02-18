@@ -1,12 +1,12 @@
+import { getClassNameWithModifiers } from '../../utils/className';
 import Headline, { Levels } from '../Headline';
 import Indicators from '../Indicators';
 import Report from '../Report';
 import TemperatureChart from '../TemperatureChart';
 import CardInfo from '../CardInfo';
 import { Experimet } from '../Main/interfaces';
-import './performanceIndicators.scss';
 import { execTemperatureFromMeasurements } from '../Main/utils';
-import { getClassNameWithModifiers } from '../../utils/className';
+import './performanceIndicators.scss';
 
 interface PerformanceIndicatorsProps {
     currentExperiment: Experimet;
@@ -21,7 +21,6 @@ const PerformanceIndicators = ({ currentExperiment, isMobile }: PerformanceIndic
     });
     const lastMeasurementExperiment = currentExperiment
         .measurements[currentExperiment.measurements.length - 1];
-
     const {
         tempWater,
         tempRoom

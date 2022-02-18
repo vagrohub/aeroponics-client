@@ -17,12 +17,14 @@ const Navbar = ({ detailsList, isMobile }: NavbarProps) => {
     return (
         <nav className={className}>
             {detailsList.map(details => {
-                return <Details
-                    summary={details.summary}
-                    isMobile={isMobile}
-                    render={details.render}
-                    key={details.summary}
-                />
+                return (
+                    <Details
+                        summary={details.summary}
+                        isMobile={isMobile}
+                        render={details.render}
+                        key={details.summary}
+                    />
+                );
             })}
         </nav>
     );

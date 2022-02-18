@@ -1,7 +1,7 @@
-import './greeting.scss'
+import { getClassNameWithModifiers } from '../../utils/className';
 import Headline, { Levels } from '../Headline';
 import Container from '../Container';
-import { getClassNameWithModifiers } from '../../utils/className';
+import './greeting.scss'
 
 interface GreetingProps {
     username: string;

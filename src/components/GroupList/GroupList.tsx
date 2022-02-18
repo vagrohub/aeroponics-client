@@ -4,10 +4,18 @@ interface GroupListProps {
     list: JSX.Element[][];
 }
 const GroupList = ({ list }: GroupListProps) => {
-    const grouList = list.map(group => {
+    const grouList = list.map((group, groupIndex) => {
         return (
-            <ul className='group-list__group' key={Math.random() * 1000}>
-                {group.map(item => <li key={Math.random() * 1000}>{item}</li>)}
+            <ul className='group-list__group' key={`group-${groupIndex}`}>
+                {
+                    group.map((item, itemIndex) => {
+                        return (
+                            <li key={`group-item-${groupIndex}-${itemIndex}`}>
+                                {item}
+                            </li>
+                        );
+                    })
+                }
             </ul>
         );
     });

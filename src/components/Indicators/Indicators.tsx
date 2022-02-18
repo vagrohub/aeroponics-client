@@ -1,17 +1,10 @@
-import './indicators.scss'
+import { getClassNameWithModifiers } from '../../utils/className';
+import { getDateDifference } from '../../utils/date';
 import GroupList from '../GroupList';
 import Wrapper from '../Wrapper';
 import { Measurement } from '../Main/interfaces';
-import { getClassNameWithModifiers } from '../../utils/className';
-
-const getIndicatorRow = (label: string, value: string) => {
-    return (
-        <div className='indicators__row'>
-            <span className='indicators__label'>{label}</span>
-            <span className='indicators__value'>{value}</span>
-        </div>
-    );
-};
+import IndicatorsRow from './IndicatorsRow';
+import './indicators.scss'
 
 interface IndicatorsProps {
     lastMeasurementExperiment: Measurement;
@@ -22,29 +15,44 @@ const Indicators = ({
     lastMeasurementExperiment,
     isMobile
 }: IndicatorsProps) => {
-    const lightOnTime = new Date(lastMeasurementExperiment.lightOffTime.getTime() - lastMeasurementExperiment.lightWorkingTime)
-        .toLocaleDateString();
+    const lightOnTime = getDateDifference(
+        lastMeasurementExperiment.lightOffTime,
+        lastMeasurementExperiment.lightWorkingTime
+    ).toLocaleDateString();
     const className = getClassNameWithModifiers({
         className: 'indicators',
         modifiers: [
             ['indicators--mobile', isMobile]
         ]
-    })
+    });
+    const error = lastMeasurementExperiment.danger ? 'Да' : 'Нет';
 
     return (
         <div className={className}>
-            <Wrapper isBoxSchadow={true}>
+            <Wrapper isBoxSchadow>
                 <GroupList
                     list={[
                         [
-                            getIndicatorRow('Температура воздуха', `${lastMeasurementExperiment.tempWater}`),
-                            getIndicatorRow('Температура комнаты', `${lastMeasurementExperiment.tempRoom}`)
+                            <IndicatorsRow
+                                label='Температура воздуха'
+                                value={`${lastMeasurementExperiment.tempWater}`}
+                            />,
+                            <IndicatorsRow
+                                label='Температура комнаты'
+                                value={`${lastMeasurementExperiment.tempRoom}`}
+                            />
                         ],
                         [
-                            getIndicatorRow('Время влючения света', lightOnTime)
+                            <IndicatorsRow
+                                label='Время влючения света'
+                                value={lightOnTime}
+                            />
                         ],
                         [
-                            getIndicatorRow('Ошибки', `${lastMeasurementExperiment.danger ? 'Да' : 'Нет'}`)
+                            <IndicatorsRow
+                                label='Ошибки'
+                                value={error}
+                            />
                         ]
                     ]}
                 />

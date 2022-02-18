@@ -6,8 +6,8 @@ import {
     LineElement
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import './temperatureGraph.scss';
 import Wrapper from '../Wrapper';
+import './temperatureGraph.scss';
 
 ChartJS.register(
     CategoryScale,
@@ -33,11 +33,11 @@ const TemperatureGraph = ({ temperatures, label }: TemperatureGraphProp) => {
                 data: temperatures.map(temperature => temperature.value),
             }
         ]
-    }
+    };
 
     return (
         <div className='temperature-graph'>
-            <Wrapper isBoxSchadow={true}>
+            <Wrapper isBoxSchadow>
                 <Line
                     data={data}
                     options={options}

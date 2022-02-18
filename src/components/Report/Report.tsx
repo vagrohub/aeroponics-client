@@ -16,7 +16,7 @@ const Report = ({ isMobile }: ReportProps) => {
 
     return (
         <div className={className}>
-            <Wrapper isBoxSchadow={true}>
+            <Wrapper isBoxSchadow>
                 <GroupList
                     list={[
                         [

@@ -32,10 +32,13 @@ const Headline = ({
             ['headline--with-icon', Boolean(img)]
         ]
     });
+    const icon = img
+        ? <Icon isMobile={isMobile} img={img} alt={value} />
+        : null;
 
     return (
         <div className={className}>
-            {img ? <Icon isMobile={isMobile} img={img} alt={value} /> : null}
+            {icon}
             {headlineMap[level]}
         </div>
     );

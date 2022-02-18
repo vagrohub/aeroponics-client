@@ -1,6 +1,6 @@
-import './details.scss';
-import Wrapper from '../Wrapper';
 import { getClassNameWithModifiers } from '../../utils/className';
+import Wrapper from '../Wrapper';
+import './details.scss';
 
 interface DetailsProps {
     summary: string;
