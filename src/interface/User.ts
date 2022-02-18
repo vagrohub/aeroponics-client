@@ -31,15 +31,9 @@ interface User {
     deviceList: Device[];
 }
 
-interface MainProps {
-    windowWidth: number;
-    user: User;
-}
-
 export type {
+    Measurement,
     Experimet,
     Device,
-    User,
-    MainProps,
-    Measurement
+    User
 }

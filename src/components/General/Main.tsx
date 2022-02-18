@@ -1,8 +1,12 @@
+import { User } from '../../interface/User';
 import Container from '../Container';
 import Desciption from '../Desciption';
 import PerformanceIndicators from '../PerformanceIndicators';
-import { MainProps } from './interfaces';
 
+interface MainProps {
+    windowWidth: number;
+    user: User;
+}
 const Main = ({ user, windowWidth }: MainProps) => {
     const isMobile = windowWidth <= 526;
 

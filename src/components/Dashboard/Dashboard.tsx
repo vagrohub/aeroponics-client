@@ -1,10 +1,13 @@
+import { User } from '../../interface/User';
 import Header from '../Header';
 import General from '../General/General';
-import { DashboardProps, User } from './interfaces';
 import { detailsList } from './configuration/header';
 import './dashboard.scss';
 
-
+interface DashboardProps {
+    windowWidth: number;
+    user: User;
+}
 const Dashboard = ({ windowWidth, user }: DashboardProps) => {
     return (
         <div className='dashboard'>
