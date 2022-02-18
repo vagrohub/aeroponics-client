@@ -1,7 +1,7 @@
 import Info from '../Info';
 import LastUpdate from '../LastUpdate';
-import { Experimet } from '../Main/interfaces';
-import { Device } from '../Main/interfaces';
+import { Experimet } from '../General/interfaces';
+import { Device } from '../General/interfaces';
 import './desciption.scss';
 
 interface DesciptionProps {

@@ -1,4 +1,4 @@
-import { User } from '../Main/interfaces';
+import { User } from '../General/interfaces';
 
 const user: User = {
     username: 'Admin',

@@ -2,7 +2,6 @@ import Container from '../Container';
 import Desciption from '../Desciption';
 import PerformanceIndicators from '../PerformanceIndicators';
 import { MainProps } from './interfaces';
-import './main.scss'
 
 const Main = ({ user, windowWidth }: MainProps) => {
     const isMobile = windowWidth <= 526;

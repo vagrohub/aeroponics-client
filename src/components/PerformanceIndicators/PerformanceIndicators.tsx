@@ -4,8 +4,8 @@ import Indicators from '../Indicators';
 import Report from '../Report';
 import TemperatureChart from '../TemperatureChart';
 import CardInfo from '../CardInfo';
-import { Experimet } from '../Main/interfaces';
-import { execTemperatureFromMeasurements } from '../Main/utils';
+import { Experimet } from '../General/interfaces';
+import { execTemperatureFromMeasurements } from '../General/utils';
 import './performanceIndicators.scss';
 
 interface PerformanceIndicatorsProps {
