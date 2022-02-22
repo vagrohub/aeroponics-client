@@ -1,4 +1,5 @@
-import { Measurement } from './interfaces';
+import { Measurement } from "../../interface/User";
+
 
 const execTemperatureFromMeasurements = (measurements: Measurement[]) => {
    const tempWaterWithDate = [];

@@ -1,12 +1,11 @@
 import { getClassNameWithModifiers } from '../../utils/className';
-import Details from '../Details';
 import './navbar.scss';
 
 interface NavbarProps {
-    detailsList: {summary: string, render: Function}[];
     isMobile: boolean;
+    children: JSX.Element[] | JSX.Element
 }
-const Navbar = ({ detailsList, isMobile }: NavbarProps) => {
+const Navbar = ({ isMobile, children }: NavbarProps) => {
     const className = getClassNameWithModifiers({
         className: 'navbar',
         modifiers: [
@@ -16,16 +15,7 @@ const Navbar = ({ detailsList, isMobile }: NavbarProps) => {
 
     return (
         <nav className={className}>
-            {detailsList.map(details => {
-                return (
-                    <Details
-                        summary={details.summary}
-                        isMobile={isMobile}
-                        render={details.render}
-                        key={details.summary}
-                    />
-                );
-            })}
+            {children}
         </nav>
     );
 };

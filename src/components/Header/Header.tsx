@@ -3,18 +3,34 @@ import {
     getClassNameWithModifiers,
     toggleBodyClass
 } from '../../utils/className';
+import { Device, Experimet } from '../../interface/User';
 import Container from '../Container';
 import Wrapper from '../Wrapper';
 import Icon from '../Icon';
-import Navbar from '../Navbar';
+import Navbar, { NavbarDetails } from '../Navbar';
 import Burger from '../Burger';
 import './header.scss';
 
 interface HeaderProps {
     windowWidth: number;
     detailsList: { summary: string, render: Function }[];
+
+    deviceList: Device[];
+    selectedDevice: Device;
+    setDevice(device: Device): any
+    experimentList: Experimet[];
+    selectedExperiment: Experimet;
+    setExperiment(experiment: Experimet): any
 }
-const Header = ({ windowWidth, detailsList }: HeaderProps) => {
+const Header = ({
+    windowWidth,
+    deviceList,
+    selectedDevice,
+    setDevice,
+    experimentList,
+    selectedExperiment,
+    setExperiment
+}: HeaderProps) => {
     const isMobile = windowWidth <= 744;
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const className = getClassNameWithModifiers({
@@ -28,7 +44,35 @@ const Header = ({ windowWidth, detailsList }: HeaderProps) => {
     const onBurgerClickHandler = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
         toggleBodyClass('body--overflow');
-    }
+    };
+
+    const settings = (
+        <NavbarDetails.Settings
+            isMobile={isMobile}
+        />
+    );
+    const devices = (
+        <NavbarDetails.Devices
+            isMobile={isMobile}
+            deviceList={deviceList}
+            setDevice={setDevice}
+
+        />
+    );
+    const experiments = (
+        <NavbarDetails.Experiments
+            isMobile={isMobile}
+            experimentList={experimentList}
+            setExperiment={setExperiment}
+        />
+    );
+    const navbar = (
+        <Navbar isMobile={isMobile}>
+            {settings}
+            {devices}
+            {experiments}
+        </Navbar>
+    );
 
     return (
         <header className={className}>
@@ -44,7 +88,7 @@ const Header = ({ windowWidth, detailsList }: HeaderProps) => {
                         </div>
 
                         <div className='header__desktop-navbar'>
-                            <Navbar detailsList={detailsList} isMobile={isMobile} />
+                            {navbar}
                         </div>
                         <div className='header__burger'>
                             <Burger
@@ -57,7 +101,7 @@ const Header = ({ windowWidth, detailsList }: HeaderProps) => {
             </Wrapper>
 
             <div className='header__mobile-navbar'>
-                <Navbar detailsList={detailsList} isMobile={isMobile} />
+                {navbar}
             </div>
         </header>
     );

@@ -1,3 +1,2 @@
-import Dashboard, { User } from './Dashboard';
+import Dashboard from './Dashboard';
 export default Dashboard;
-export type { User }

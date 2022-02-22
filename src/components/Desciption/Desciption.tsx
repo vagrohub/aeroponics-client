@@ -1,7 +1,6 @@
+import { Device, Experimet } from '../../interface/User';
 import Info from '../Info';
 import LastUpdate from '../LastUpdate';
-import { Experimet } from '../General/interfaces';
-import { Device } from '../General/interfaces';
 import './desciption.scss';
 
 interface DesciptionProps {

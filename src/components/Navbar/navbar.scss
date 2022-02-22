@@ -3,6 +3,15 @@
     > * {
         margin-left: 20px;
     }
+
+    &__select {
+        user-select: none;
+        cursor: pointer;
+
+        &::first-letter {
+            text-transform: uppercase;
+        }
+    }
 }
 .navbar.navbar--mobile {
 

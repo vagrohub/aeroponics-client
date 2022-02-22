@@ -4,9 +4,9 @@ import Indicators from '../Indicators';
 import Report from '../Report';
 import TemperatureChart from '../TemperatureChart';
 import CardInfo from '../CardInfo';
-import { Experimet } from '../General/interfaces';
-import { execTemperatureFromMeasurements } from '../General/utils';
+import { execTemperatureFromMeasurements } from '../Main/utils';
 import './performanceIndicators.scss';
+import { Experimet } from '../../interface/User';
 
 interface PerformanceIndicatorsProps {
     currentExperiment: Experimet;

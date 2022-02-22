@@ -2,9 +2,9 @@ import { getClassNameWithModifiers } from '../../utils/className';
 import { getDateDifference } from '../../utils/date';
 import GroupList from '../GroupList';
 import Wrapper from '../Wrapper';
-import { Measurement } from '../General/interfaces';
 import IndicatorsRow from './IndicatorsRow';
 import './indicators.scss'
+import { Measurement } from '../../interface/User';
 
 interface IndicatorsProps {
     lastMeasurementExperiment: Measurement;
