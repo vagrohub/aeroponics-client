@@ -13,22 +13,16 @@ import './header.scss';
 
 interface HeaderProps {
     windowWidth: number;
-    detailsList: { summary: string, render: Function }[];
-
     deviceList: Device[];
-    selectedDevice: Device;
     setDevice(device: Device): any
     experimentList: Experimet[];
-    selectedExperiment: Experimet;
     setExperiment(experiment: Experimet): any
 }
 const Header = ({
     windowWidth,
     deviceList,
-    selectedDevice,
     setDevice,
     experimentList,
-    selectedExperiment,
     setExperiment
 }: HeaderProps) => {
     const isMobile = windowWidth <= 744;

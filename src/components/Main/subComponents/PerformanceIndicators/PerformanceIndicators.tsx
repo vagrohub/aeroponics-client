@@ -1,30 +1,32 @@
-import { getClassNameWithModifiers } from '../../utils/className';
-import Headline, { Levels } from '../Headline';
-import Indicators from '../Indicators';
-import Report from '../Report';
-import TemperatureChart from '../TemperatureChart';
-import CardInfo from '../CardInfo';
-import { execTemperatureFromMeasurements } from '../Main/utils';
+import { getClassNameWithModifiers } from '../../../../utils/className';
+import CardInfo from '../../../CardInfo';
+import Headline, { Levels } from '../../../Headline';
+import Indicators from '../../../Indicators';
+import Report from '../../../Report';
+import TemperatureChart from '../../../TemperatureChart';
+import { useMainContext } from '../../hooks';
+import { execTemperatureFromMeasurements } from '../../utils';
 import './performanceIndicators.scss';
-import { Experimet } from '../../interface/User';
 
-interface PerformanceIndicatorsProps {
-    currentExperiment: Experimet;
-    isMobile: boolean;
-}
-const PerformanceIndicators = ({ currentExperiment, isMobile }: PerformanceIndicatorsProps) => {
+const PerformanceIndicators = () => {
+    const { isMobile, selectedExperiment } = useMainContext();
+    
     const clasName = getClassNameWithModifiers({
         className: 'performance-indicators',
         modifiers: [
             ['performance-indicators--mobile', isMobile]
         ]
     });
-    const lastMeasurementExperiment = currentExperiment
-        .measurements[currentExperiment.measurements.length - 1];
+
+    if (!selectedExperiment) return null;
+    if (selectedExperiment?.measurements.length === 0) return null;
+
+    const lastMeasurementExperiment = selectedExperiment
+        .measurements[selectedExperiment.measurements.length - 1];
     const {
         tempWater,
         tempRoom
-    } = execTemperatureFromMeasurements(currentExperiment.measurements);
+    } = execTemperatureFromMeasurements(selectedExperiment.measurements);
     const temperatureChart = isMobile
         ? null
         : (

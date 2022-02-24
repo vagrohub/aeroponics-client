@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Device, Experimet, User } from '../../interface/User';
+import { useSelectFromArray } from '../../hooks';
+import { User } from '../../interface/User';
 import Header from '../Header';
-import Main, { MainSection } from '../Main';
-import { detailsList } from './configuration/header';
+import Main from '../Main';
+
 import './dashboard.scss';
 
 interface DashboardProps {
@@ -11,80 +11,39 @@ interface DashboardProps {
 }
 const Dashboard = ({ windowWidth, user }: DashboardProps) => {
     const isMobile = windowWidth <= 526;
+
     const deviceList = user.deviceList;
+    const [selectedDevice, setDevice] = useSelectFromArray(deviceList);
 
-    let experimentList: Experimet[] = [];
-    let mainChildren: JSX.Element;
-
-    const initialDevice = deviceList[0] || null;
-    const [selectedDevice, setDevice] = useState<Device|null>(initialDevice);
-    const [selectedExperiment, setExperiment] = useState<Experimet|null>(selectedDevice.currentExperiment || null);
-
-    if (!selectedDevice) {
-        mainChildren = (
-            <MainSection.Greetings
-                username={user.username}
-                isMobile={isMobile}
-            />
-        )
-    } else if (selectedExperiment.measurements.length === 0) {
-        experimentList = [
-            ...selectedDevice.cycles,
-            selectedDevice.currentExperiment
-        ]
-
-        mainChildren = (
-            <>
-                <MainSection.Description
-                    selectedDevice={selectedDevice}
-                    selectedExperiment={selectedExperiment}
-                    isMobile={isMobile}
-                />
-                <section>
-                    Измеренений у эксперимента "{selectedExperiment.title}"
-                    пока нет
-                </section>
-            </>
-        );
-    } else {
-        experimentList = [
-            ...selectedDevice.cycles,
-            selectedDevice.currentExperiment
-        ]
-
-        mainChildren = (
-            <>
-                <MainSection.Description
-                    selectedDevice={selectedDevice}
-                    selectedExperiment={selectedExperiment}
-                    isMobile={isMobile}
-                />
-                <MainSection.Measurement
-                    selectedExperiment={selectedExperiment}
-                    isMobile={isMobile}
-                />
-            </>
-        );
-    }
-
-
+    const expListSelectDevice = !selectedDevice
+        ? []
+        : [
+            selectedDevice.currentExperiment,
+            ...selectedDevice.cycles
+        ];
+    const [selectedExperiment, setExperiment] = useSelectFromArray(expListSelectDevice);
 
     return (
         <div className='dashboard'>
-            <Header
-                detailsList={detailsList}
-                windowWidth={windowWidth}
-                deviceList={deviceList}
-                selectedDevice={selectedDevice}
-                setDevice={setDevice}
-                experimentList={experimentList}
-                selectedExperiment={selectedExperiment}
-                setExperiment={setExperiment}
-            />
-
+            <div className='dashboard__header'>
+                <Header
+                    windowWidth={windowWidth}
+                    deviceList={deviceList}
+                    setDevice={setDevice}
+                    experimentList={expListSelectDevice}
+                    setExperiment={setExperiment}
+                />
+            </div>
             <div className='dashboard__main'>
-                <Main>
-                    {mainChildren}
+                <Main
+                    isMobile={isMobile}
+                    user={user}
+                    selectedExperiment={selectedExperiment}
+                    selectedDevice={selectedDevice}
+                >
+                    <Main.Greetings />
+                    <Main.Description />
+                    <Main.PerformanceIndicators />
                 </Main>
             </div>
         </div>
@@ -92,10 +51,3 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
 };
 
 export default Dashboard;
-
-/*
-<MainSection.Measurement
-    selectedExperiment={selectedExperiment}
-    isMobile={isMobile}
-/>
-*/

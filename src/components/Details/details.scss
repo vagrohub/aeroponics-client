@@ -20,6 +20,11 @@
         margin-top: 20px;
     }
 
+    &__list {
+        min-width: 280px;
+        min-height: 100px;
+    }
+
     summary::-webkit-details-marker {
         display: none;
     }

@@ -1,17 +1,18 @@
-import { getClassNameWithModifiers } from '../../utils/className';
-import Headline, { Levels } from '../Headline';
+import { getClassNameWithModifiers } from '../../../../utils/className';
+import Headline, { Levels } from '../../../Headline';
+import { useMainContext } from '../../hooks';
+import './greetings.scss';
 
-interface GreetingProps {
-    username: string;
-    isMobile: boolean;
-}
-const Greetings = ({ username, isMobile }: GreetingProps) => {
+const Greetings = () => {
+    const { isMobile, user } = useMainContext();
     const className = getClassNameWithModifiers({
-        className: 'main__greeting',
+        className: 'greetings',
         modifiers: [
-            ['main__greeting--mobile', isMobile]
+            ['greetings--mobile', isMobile]
         ]
     });
+
+    if (!user?.username) return null;
 
     return (
         <div className={className}>
@@ -19,7 +20,7 @@ const Greetings = ({ username, isMobile }: GreetingProps) => {
                 img={require('./greeting.png')}
                 level={Levels.First}
                 isMobile={isMobile}
-                value={`Приветсвую, ${username}!`}
+                value={`Приветсвую, ${user.username}!`}
             />
 
             <p>
