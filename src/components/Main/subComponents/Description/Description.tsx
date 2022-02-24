@@ -1,28 +1,26 @@
-import { Device, Experimet } from '../../interface/User';
-import Info from '../Info';
-import LastUpdate from '../LastUpdate';
-import './desciption.scss';
+import Info from '../../../Info';
+import LastUpdate from '../../../LastUpdate';
+import { useMainContext } from '../../hooks';
+import './description.scss';
 
-interface DesciptionProps {
-    selectedExperiment: Experimet;
-    selectedDevice: Device;
-    isMobile: boolean;
-}
-const Desciption = ({
-    selectedExperiment,
-    selectedDevice,
-    isMobile
-}: DesciptionProps) => {
+const Description = () => {
+    const {
+        isMobile,
+        selectedExperiment,
+        selectedDevice
+    } = useMainContext();
+
+    if (!selectedExperiment || !selectedDevice) return null;
 
     return (
-        <section className='desciption'>
-            <div className='desciption__last-update'>
+        <section className='description'>
+            <div className='description__last-update'>
                 <LastUpdate
                     dateLastUpdate={selectedExperiment.lastUpdate}
                 />
             </div>
 
-            <div className='desciption__selected-device'>
+            <div className='description__selected-device'>
                 <Info
                     img={require('./device.png')}
                     title={selectedDevice.name}
@@ -31,7 +29,7 @@ const Desciption = ({
                 />
             </div>
 
-            <div className='desciption__selected-experiment'>
+            <div className='description__selected-experiment'>
                 <Info
                     img={require('./experiment.png')}
                     title={selectedExperiment.title}
@@ -43,4 +41,4 @@ const Desciption = ({
     );
 };
 
-export default Desciption;
+export default Description;
