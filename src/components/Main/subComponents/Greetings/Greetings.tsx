@@ -12,7 +12,7 @@ const Greetings = () => {
         ]
     });
 
-    if (!user?.username) return null;
+    if (!user || user?.deviceList.length !== 0) return null;
 
     return (
         <div className={className}>

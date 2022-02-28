@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import Headline, { Levels } from '../Headline';
-import SimpleButton from '../SimpleButton';
-import TemperatureGraph from '../TemperatureGraph';
-import Wrapper from '../Wrapper';
+import Headline, { Levels } from '../../../Headline';
+import SimpleButton from '../../../SimpleButton';
+import Wrapper from '../../../Wrapper';
 import './temperatureChart.scss';
+import TemperatureGraph from '../TemperatureGraph';
 
 interface Temperture {
     value: number;
@@ -55,7 +55,7 @@ const TemperatureChart = ({ tempRoom, tempWater }: TemperatureChartProps) => {
             </div>
 
             <div className='temperature-chart__chart'>
-                <TemperatureGraph label={show} temperatures={showTemperatures}  />   
+                <TemperatureGraph label={show} temperatures={showTemperatures} />
             </div>
         </div>
     );

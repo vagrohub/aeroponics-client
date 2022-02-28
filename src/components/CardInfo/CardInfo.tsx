@@ -1,30 +1,28 @@
-import Headline, { Levels } from '../Headline';
-import Wrapper from '../Wrapper';
+import Title from './subComponents/Title';
+import Body from './subComponents/Body';
+import Group from './subComponents/Group';
+import Row from './subComponents/Row';
+import CardInfoContext from './CardInfoContext';
+
 import './cardInfo.scss';
 
 interface CardInfoProps {
-    title: string;
+    children: JSX.Element | JSX.Element[];
     isMobile: boolean;
-    render(): JSX.Element;
 }
-const CardInfo = ({ title, render, isMobile }: CardInfoProps) => {
+const CardInfo = ({ children, isMobile }: CardInfoProps) => {
     return (
         <div className='card-info'>
-            <Wrapper isBoxSchadow={true}>
-                <div className='card-info__title'>
-                    <Headline
-                        level={Levels.Third}
-                        value={title}
-                        isMobile={isMobile}
-                    />
-                </div>
-            </Wrapper>
-
-            <div className='card-info__body'>
-                {render()}
-            </div>
+            <CardInfoContext.Provider value={{ isMobile }}>
+                {children}
+            </CardInfoContext.Provider>
         </div>
     );
 };
+
+CardInfo.Title = Title;
+CardInfo.Body = Body;
+CardInfo.Group = Group;
+CardInfo.Row = Row;
 
 export default CardInfo;

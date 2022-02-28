@@ -1,8 +1,10 @@
 .temperature-chart {
+    padding: 20px 0;
 
     &__header {
         display: flex;
         align-items: center;
+        margin-bottom: 20px;
     }
 
     &__title {

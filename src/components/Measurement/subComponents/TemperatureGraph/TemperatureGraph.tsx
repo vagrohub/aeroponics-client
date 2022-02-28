@@ -6,7 +6,7 @@ import {
     LineElement
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
-import Wrapper from '../Wrapper';
+import Wrapper from '../../../Wrapper';
 import './temperatureGraph.scss';
 
 ChartJS.register(
