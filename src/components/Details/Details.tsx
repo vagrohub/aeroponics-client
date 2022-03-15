@@ -1,13 +1,15 @@
 import { getClassNameWithModifiers } from '../../utils/className';
-import Wrapper from '../Wrapper';
+import Summary from './Summary';
+import Body from './Body';
+import Item from './Item';
+import Group from './Group';
 import './details.scss';
 
 interface DetailsProps {
-    summary: string;
+    children: JSX.Element[];
     isMobile: boolean;
-    render: Function;
 }
-const Details = ({ summary, render, isMobile }: DetailsProps) => {
+const Details = ({ children, isMobile }: DetailsProps) => {
     const className = getClassNameWithModifiers({
         className: 'details',
         modifiers: [
@@ -17,16 +19,15 @@ const Details = ({ summary, render, isMobile }: DetailsProps) => {
 
     return (
         <details className={className}>
-            <summary>{summary}</summary>
-
-            <Wrapper isBoxSchadow={!isMobile}>
-                <div className='details__list'>
-                    {render()}
-                </div>
-            </Wrapper>
+            {children}
         </details>
     );
 };
+
+Details.Summary = Summary;
+Details.Body = Body;
+Details.Item = Item;
+Details.Group = Group;
 
 export type { DetailsProps };
 export default Details;

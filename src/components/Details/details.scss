@@ -1,5 +1,8 @@
+// for desctop and mobile
 .details {
     display: block;
+    position: relative;
+    margin: 10px;
 
     summary {
         display: flex;
@@ -16,13 +19,19 @@
         user-select: none;
     }
 
-    .wrapper {
-        margin-top: 20px;
+    &__body {
+        margin-top: 10px;
+        right: 0;
     }
 
     &__list {
         min-width: 280px;
-        min-height: 100px;
+        padding-left: 0;
+        padding: 0 20px;
+    }
+
+    &__group {
+        padding: 0;
     }
 
     summary::-webkit-details-marker {
@@ -33,11 +42,31 @@
         content: '\25B6';
         margin-left: 10px;
     }
+
+    &__item {
+        font-size: 16px;
+        list-style-type: none;
+        
+        &::first-letter {
+            text-transform: uppercase;
+        }
+
+        & + & {
+            margin-top: 20px;
+            
+            .details__group {
+                margin-top: 20px;
+                padding-top: 20px;
+                border-top: 1px solid #C8BFBF;
+            }
+        }
+    }
 }
 .details[open] > summary::after {
     transform: rotate(90deg);
 }
 
+// for desctop
 .details:not(.details.details--mobile) {
     display: inline-block;
 
@@ -47,7 +76,21 @@
         font-size: 18px;
     }
 
-    .wrapper {
+    .details__body {
         position: absolute;
+        margin-top: 20px;
     }
-}   
+
+    .details__item {
+        font-size: 18px;
+    }
+}
+
+// for mobile 
+.details.details--mobile {
+    
+    .details__body {
+        left: 0;
+        right: 100%;
+    }
+}

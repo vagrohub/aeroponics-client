@@ -8,6 +8,7 @@ interface Measurement {
     pumpTime: number,
     pumpSleep: number,
     date: Date
+    _id: string;
 }
 
 interface Experimet {
@@ -15,6 +16,7 @@ interface Experimet {
     description: string;
     measurements: Measurement[];
     lastUpdate: Date;
+    _id: string;
 }
 
 interface Device {
@@ -23,12 +25,14 @@ interface Device {
     description: string;
     cycles: Experimet[];
     currentExperiment: Experimet;
+    _id: string;
 }
 
 interface User {
     username: string;
     password: string;
     deviceList: Device[];
+    _id: string;
 }
 
 export type {
