@@ -10,8 +10,8 @@ interface MainProps {
     children: JSX.Element[] | JSX.Element;
     isMobile: boolean;
     user: User
-    selectedExperiment: Experimet
-    selectedDevice: Device
+    selectedExperiment: Experimet | undefined
+    selectedDevice: Device | undefined
 }
 const Main = ({
     children,

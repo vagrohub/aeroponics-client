@@ -4,14 +4,14 @@ import { Device, Experimet, User } from '../../interface/User';
 interface Context {
     isMobile: boolean,
     user: User | null,
-    selectedExperiment: Experimet | null,
-    selectedDevice: Device | null
+    selectedExperiment: Experimet | undefined,
+    selectedDevice: Device | undefined
 };
 const MainContext = createContext<Context>({
     isMobile: false,
     user: null,
-    selectedExperiment: null,
-    selectedDevice: null
+    selectedExperiment: undefined,
+    selectedDevice: undefined
 });
 
 export default MainContext;

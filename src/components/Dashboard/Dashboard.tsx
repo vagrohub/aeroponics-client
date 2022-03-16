@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useSelectFromArray } from '../../hooks';
-import { Device, User } from '../../interface/User';
+import { Device, Experimet, User } from '../../interface/User';
 import Details from '../Details';
 import Header from '../Header';
 import Main from '../Main';
+import { useUserData } from './hooks';
 
 import './dashboard.scss';
 
@@ -13,26 +13,32 @@ interface DashboardProps {
 }
 const Dashboard = ({ windowWidth, user }: DashboardProps) => {
     const isMobile = windowWidth <= 858;
-    const deviceList = user.deviceList;
-    const [selectedDevice, setDevice] = useSelectFromArray(deviceList);
-
-    const expListSelectDevice = !selectedDevice
-        ? []
-        : [
-            selectedDevice.currentExperiment,
-            ...selectedDevice.cycles
-        ];
-    const [selectedExperiment, setExperiment] = useSelectFromArray(expListSelectDevice);
+    const {
+        experimentList,
+        setExperiment,
+        selectExperiment,
+        deviceList,
+        setDevice,
+        selectDevice
+    } = useUserData(user);
 
     const [isCollapseHidden, setIsCollapseHidden] = useState(true)
     const onToggleEvent = () => {
         document.body.classList.toggle('body--overflow');
         setIsCollapseHidden(() => !isCollapseHidden)
     };
-    
-    const onToggleDeviceHandler = (id: string) => {     
-        setDevice(deviceList.find((device: Device) => device._id === id));
+
+    const onSelectDeviceHandler = (id: string) => {
+        setDevice(deviceList.find(
+            (device: Device) => device._id === id)
+        );
     };
+
+    const onSelectExperimentHandler = (id: string) => {
+        setExperiment(experimentList.find(
+            (experiment: Experimet) => experiment._id === id)
+        );
+    }
 
     return (
         <div className='dashboard'>
@@ -58,7 +64,7 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
                                     <Details.Item>Текущее устройство</Details.Item>
                                     <Details.Item>Текущий эксперимент</Details.Item>
                                 </Details.Group>
-                                
+
                                 <Details.Group>
                                     <Details.Item>Остановить эксперимент</Details.Item>
                                 </Details.Group>
@@ -75,7 +81,7 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
                                             <Details.Item key={device._id}>
                                                 <span onClick={
                                                     () => {
-                                                        onToggleDeviceHandler(device._id)
+                                                        onSelectDeviceHandler(device._id)
                                                     }
                                                 }>
                                                     {device.name}
@@ -92,10 +98,16 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
 
                             <Details.Body>
                                 {
-                                    expListSelectDevice.map(experiment => {
+                                    experimentList.map(experiment => {
                                         return (
                                             <Details.Item key={experiment._id}>
-                                                {experiment.title}
+                                                <span onClick={
+                                                    () => {
+                                                        onSelectExperimentHandler(experiment._id)
+                                                    }
+                                                }>
+                                                    {experiment.title}
+                                                </span>
                                             </Details.Item>
                                         );
                                     })
@@ -110,8 +122,8 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
                 <Main
                     isMobile={isMobile}
                     user={user}
-                    selectedExperiment={selectedExperiment}
-                    selectedDevice={selectedDevice}
+                    selectedExperiment={selectExperiment}
+                    selectedDevice={selectDevice}
                 >
                     <Main.Greetings />
                     <Main.Description />
