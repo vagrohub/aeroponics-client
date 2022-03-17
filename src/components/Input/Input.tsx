@@ -1,13 +1,14 @@
 import { getClassNameWithModifiers } from '../../utils/className';
+import Label from './Label';
+import Text from './Text';
+import Textarea from './Textarea';
 import './input.scss';
 
 interface InputProps {
-    label: string;
-    placeholder: string;
-    type: string;
+    children: JSX.Element | JSX.Element[];
     isMobile: boolean;
 }
-const Input = ({label, placeholder, type, isMobile}: InputProps) => {
+const Input = ({ children, isMobile }: InputProps) => {
     const className = getClassNameWithModifiers({
         className: 'input',
         modifiers: [
@@ -17,14 +18,13 @@ const Input = ({label, placeholder, type, isMobile}: InputProps) => {
 
     return (
         <label className={className}>
-            <span className='input__label'>{label}</span>
-            <input
-                type={type}
-                className='input__field'
-                placeholder={placeholder}
-            />
+            {children}
         </label>
     );
 };
+
+Input.Label = Label;
+Input.Text = Text;
+Input.Textarea = Textarea;
 
 export default Input;

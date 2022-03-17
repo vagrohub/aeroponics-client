@@ -17,7 +17,7 @@ const Icon = ({
             ['icon--mobile', isMobile],
         ]
     });
-
+    
     return (
         <span className={className}>
             <img src={img} alt={alt} />

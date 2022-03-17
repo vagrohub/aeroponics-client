@@ -3,9 +3,12 @@ import { Device, Experimet, User } from '../../interface/User';
 import Details from '../Details';
 import Header from '../Header';
 import Main from '../Main';
+import ActiveElement from '../ActiveElement';
+import Modal from '../Modal';
+import Input from '../Input';
 import { useUserData } from './hooks';
-
 import './dashboard.scss';
+import SimpleButton from '../SimpleButton';
 
 interface DashboardProps {
     windowWidth: number;
@@ -22,12 +25,21 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
         selectDevice
     } = useUserData(user);
 
+    // utils
+    const pinBody = () => document.body.classList.add('body--overflow');
+    const unPinBody = () => document.body.classList.remove('body--overflow');
+    const togglePinBody = () => document.body.classList.toggle('body--overflow');
+
+
+    // mobile menu settings
     const [isCollapseHidden, setIsCollapseHidden] = useState(true)
     const onToggleEvent = () => {
-        document.body.classList.toggle('body--overflow');
+        togglePinBody()
         setIsCollapseHidden(() => !isCollapseHidden)
     };
 
+
+    // toggle device and experiment
     const onSelectDeviceHandler = (id: string) => {
         setDevice(deviceList.find(
             (device: Device) => device._id === id)
@@ -38,7 +50,22 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
         setExperiment(experimentList.find(
             (experiment: Experimet) => experiment._id === id)
         );
-    }
+    };
+
+    // modal settings
+    const [idShowModal, setIdShowModal] = useState<string>();
+
+    const hashIsShowModal = {
+        newDevice: idShowModal === 'newDevice',
+        newExperiment: idShowModal === 'newExperiment',
+        currentDevice: idShowModal === 'currentDevice',
+        currentExperiment: idShowModal === 'currentExperiment'
+    };
+
+    const toggleShowModal = (id: string) => () => {
+        setIdShowModal(() => id);
+        pinBody();
+    };
 
     return (
         <div className='dashboard'>
@@ -56,13 +83,49 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
 
                             <Details.Body>
                                 <Details.Group>
-                                    <Details.Item>Новое устройство</Details.Item>
-                                    <Details.Item>Новый эксперимент</Details.Item>
+                                    <Details.Item>
+                                        <ActiveElement
+                                            isMobile={isMobile}
+                                            onClickHandler={
+                                                toggleShowModal('newDevice')
+                                            }
+                                        >
+                                            Новое устройства
+                                        </ActiveElement>
+                                    </Details.Item>
+                                    <Details.Item>
+                                        <ActiveElement
+                                            isMobile={isMobile}
+                                            onClickHandler={
+                                                toggleShowModal('newExperiment')
+                                            }
+                                        >
+                                            Новый эксперимент
+                                        </ActiveElement>
+                                    </Details.Item>
                                 </Details.Group>
 
                                 <Details.Group>
-                                    <Details.Item>Текущее устройство</Details.Item>
-                                    <Details.Item>Текущий эксперимент</Details.Item>
+                                    <Details.Item>
+                                        <ActiveElement
+                                            isMobile={isMobile}
+                                            onClickHandler={
+                                                toggleShowModal('currentDevice')
+                                            }
+                                        >
+                                            Текущее устройство
+                                        </ActiveElement>
+                                    </Details.Item>
+                                    <Details.Item>
+                                        <ActiveElement
+                                            isMobile={isMobile}
+                                            onClickHandler={
+                                                toggleShowModal('currentExperiment')
+                                            }
+                                        >
+                                            Текущий эксперимент
+                                        </ActiveElement>
+                                    </Details.Item>
                                 </Details.Group>
 
                                 <Details.Group>
@@ -118,6 +181,7 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
                     </Header.Collapse>
                 </Header>
             </div>
+
             <div className='dashboard__main'>
                 <Main
                     isMobile={isMobile}
@@ -130,6 +194,114 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
                     <Main.PerformanceIndicators />
                 </Main>
             </div>
+
+            <Modal
+                isMobile={isMobile}
+                isShow={hashIsShowModal.newDevice}
+                onClosedClickHandler={unPinBody}
+            >
+                <Input isMobile={isMobile}>
+                    <Input.Label>Название</Input.Label>
+
+                    <Input.Text>Введите название нового устройства</Input.Text>
+                </Input>
+
+                <Input isMobile={isMobile}>
+                    <Input.Label>Описание</Input.Label>
+
+                    <Input.Textarea>Описание нового устройства</Input.Textarea>
+                </Input>
+
+                <SimpleButton
+                    isMobile={isMobile}
+                    isFill={isMobile}
+                    isDisabled={false}
+                    text='сохранить'
+                    value='сохранить'
+                    onClick={() => console.log('work')}
+                />
+            </Modal>
+
+            <Modal
+                isMobile={isMobile}
+                isShow={hashIsShowModal.newExperiment}
+                onClosedClickHandler={unPinBody}
+            >
+                <Input isMobile={isMobile}>
+                    <Input.Label>Название</Input.Label>
+
+                    <Input.Text>Введите название нового эксперимента</Input.Text>
+                </Input>
+
+                <Input isMobile={isMobile}>
+                    <Input.Label>Описание</Input.Label>
+
+                    <Input.Textarea>Описание нового эксперимента</Input.Textarea>
+                </Input>
+
+                <SimpleButton
+                    isMobile={isMobile}
+                    isFill={isMobile}
+                    isDisabled={false}
+                    text='сохранить'
+                    value='сохранить'
+                    onClick={() => console.log('work')}
+                />
+            </Modal>
+
+            <Modal
+                isMobile={isMobile}
+                isShow={hashIsShowModal.currentDevice}
+                onClosedClickHandler={unPinBody}
+            >
+                <Input isMobile={isMobile}>
+                    <Input.Label>Название</Input.Label>
+
+                    <Input.Text>{selectDevice?.name || ''}</Input.Text>
+                </Input>
+
+                <Input isMobile={isMobile}>
+                    <Input.Label>Описание</Input.Label>
+
+                    <Input.Textarea>{selectDevice?.description || ''}</Input.Textarea>
+                </Input>
+
+                <SimpleButton
+                    isMobile={isMobile}
+                    isFill={isMobile}
+                    isDisabled={false}
+                    text='сохранить'
+                    value='сохранить'
+                    onClick={() => console.log('work')}
+                />
+            </Modal>
+
+            <Modal
+                isMobile={isMobile}
+                isShow={hashIsShowModal.currentExperiment}
+                onClosedClickHandler={unPinBody}
+            >
+                <Input isMobile={isMobile}>
+                    <Input.Label>Название</Input.Label>
+
+                    <Input.Text>{selectExperiment?.title || ''}</Input.Text>
+                </Input>
+
+                <Input isMobile={isMobile}>
+                    <Input.Label>Описание</Input.Label>
+
+                    <Input.Textarea>{selectExperiment?.description || ''}</Input.Textarea>
+                </Input>
+
+                <SimpleButton
+                    isMobile={isMobile}
+                    isFill={isMobile}
+                    isDisabled={false}
+                    text='сохранить'
+                    value='сохранить'
+                    onClick={() => console.log('work')}
+                />
+            </Modal>
         </div>
     );
 };
