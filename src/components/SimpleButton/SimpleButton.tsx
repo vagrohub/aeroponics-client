@@ -7,6 +7,7 @@ interface SimpleButtonProps {
     isFill: boolean;
     value: string;
     text: string;
+    type?: 'button' | 'submit' | 'reset';
     onClick: Function;
 }
 const SimpleButton = ({
@@ -15,6 +16,7 @@ const SimpleButton = ({
     isFill,
     value,
     text,
+    type,
     onClick
 }: SimpleButtonProps) => {
     const className = getClassNameWithModifiers({
@@ -31,6 +33,7 @@ const SimpleButton = ({
             disabled={isDisabled}
             onClick={(event) => onClick(event)}
             value={value}
+            type={type}
         >
             {text}
         </button>

@@ -63,7 +63,7 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
     };
 
     const toggleShowModal = (id: string) => () => {
-        setIdShowModal(() => id);
+        setIdShowModal(id);
         pinBody();
     };
 

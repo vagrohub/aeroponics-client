@@ -2,6 +2,7 @@ import { getClassNameWithModifiers } from '../../utils/className';
 import Label from './Label';
 import Text from './Text';
 import Textarea from './Textarea';
+import Password from './Password';
 import './input.scss';
 
 interface InputProps {
@@ -26,5 +27,6 @@ const Input = ({ children, isMobile }: InputProps) => {
 Input.Label = Label;
 Input.Text = Text;
 Input.Textarea = Textarea;
+Input.Password = Password;
 
 export default Input;
