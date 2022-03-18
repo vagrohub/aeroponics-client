@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Auth from '../../pages/Auth';
-import Registration from '../../pages/Registration';
-import Dashboard from '../Dashboard';
+import Auth from '../pages/Auth';
+import Registration from '../pages/Registration';
+import Dashboard from '../pages/Dashboard';
 import { user } from './data';
 import './app.scss';
 
@@ -10,6 +10,7 @@ const getWindowWidth = (): number => document.documentElement.clientWidth;
 
 const App = () => {
     const [windowWidth, setWindowWidth] = useState(getWindowWidth());
+    const isMobile = windowWidth <= 858;
 
     const onResizeEvent = () => setWindowWidth(getWindowWidth());
     useEffect(() => {
@@ -23,7 +24,7 @@ const App = () => {
             <Routes>
                 <Route
                     path='/'
-                    element={<Dashboard windowWidth={windowWidth} user={user} />}
+                    element={<Dashboard isMobile={isMobile} user={user} />}
                 />
                 <Route path='/auth' element={<Auth isMobile={false} />} />
                 <Route path='/registration' element={<Registration isMobile={false} />} />

@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { Device, Experimet, User } from '../../interface/User';
-import Details from '../Details';
-import Header from '../Header';
-import Main from '../Main';
-import ActiveElement from '../ActiveElement';
-import Modal from '../Modal';
-import Input from '../Input';
+import Details from '../../components/Details';
+import Header from '../../components/Header';
+import Main from '../../components/Main';
+import ActiveElement from '../../components/ActiveElement';
+import Modal from '../../components/Modal';
+import Input from '../../components/Input';
+import Navbar from '../../components/Navbar';
 import { useUserData } from './hooks';
 import './dashboard.scss';
-import SimpleButton from '../SimpleButton';
+import SimpleButton from '../../components/SimpleButton';
 
 interface DashboardProps {
-    windowWidth: number;
+    isMobile: boolean;
     user: User;
 }
-const Dashboard = ({ windowWidth, user }: DashboardProps) => {
-    const isMobile = windowWidth <= 858;
+const Dashboard = ({ isMobile, user }: DashboardProps) => {
     const {
         experimentList,
         setExperiment,
@@ -62,7 +62,7 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
         currentExperiment: idShowModal === 'currentExperiment'
     };
 
-    const toggleShowModal = (id: string) => () => {
+    const toggleShowModal = (id: string) => {
         setIdShowModal(id);
         pinBody();
     };
@@ -78,106 +78,19 @@ const Dashboard = ({ windowWidth, user }: DashboardProps) => {
                     <Header.Toggle callback={onToggleEvent} />
 
                     <Header.Collapse isHidden={isCollapseHidden && isMobile}>
-                        <Details isMobile={isMobile}>
-                            <Details.Summary>Настройки</Details.Summary>
-
-                            <Details.Body>
-                                <Details.Group>
-                                    <Details.Item>
-                                        <ActiveElement
-                                            isMobile={isMobile}
-                                            onClickHandler={
-                                                toggleShowModal('newDevice')
-                                            }
-                                        >
-                                            Новое устройства
-                                        </ActiveElement>
-                                    </Details.Item>
-                                    <Details.Item>
-                                        <ActiveElement
-                                            isMobile={isMobile}
-                                            onClickHandler={
-                                                toggleShowModal('newExperiment')
-                                            }
-                                        >
-                                            Новый эксперимент
-                                        </ActiveElement>
-                                    </Details.Item>
-                                </Details.Group>
-
-                                <Details.Group>
-                                    <Details.Item>
-                                        <ActiveElement
-                                            isMobile={isMobile}
-                                            onClickHandler={
-                                                toggleShowModal('currentDevice')
-                                            }
-                                        >
-                                            Текущее устройство
-                                        </ActiveElement>
-                                    </Details.Item>
-                                    <Details.Item>
-                                        <ActiveElement
-                                            isMobile={isMobile}
-                                            onClickHandler={
-                                                toggleShowModal('currentExperiment')
-                                            }
-                                        >
-                                            Текущий эксперимент
-                                        </ActiveElement>
-                                    </Details.Item>
-                                </Details.Group>
-
-                                <Details.Group>
-                                    <Details.Item>Остановить эксперимент</Details.Item>
-                                </Details.Group>
-                            </Details.Body>
-                        </Details>
-
-                        <Details isMobile={isMobile}>
-                            <Details.Summary>устройства</Details.Summary>
-
-                            <Details.Body>
-                                {
-                                    deviceList.map(device => {
-                                        return (
-                                            <Details.Item key={device._id}>
-                                                <span onClick={
-                                                    () => {
-                                                        onSelectDeviceHandler(device._id)
-                                                    }
-                                                }>
-                                                    {device.name}
-                                                </span>
-                                            </Details.Item>
-                                        );
-                                    })
-                                }
-                            </Details.Body>
-                        </Details>
-
-                        <Details isMobile={isMobile}>
-                            <Details.Summary>эксперименты</Details.Summary>
-
-                            <Details.Body>
-                                {
-                                    experimentList.map(experiment => {
-                                        return (
-                                            <Details.Item key={experiment._id}>
-                                                <span onClick={
-                                                    () => {
-                                                        onSelectExperimentHandler(experiment._id)
-                                                    }
-                                                }>
-                                                    {experiment.title}
-                                                </span>
-                                            </Details.Item>
-                                        );
-                                    })
-                                }
-                            </Details.Body>
-                        </Details>
-
+                        <Navbar isMobile={isMobile}>
+                            <Navbar.Settings
+                                toggleShowModal={toggleShowModal}
+                            />
+                            <Navbar.Devices
+                                deviceList={deviceList}
+                                onSelectDeviceHandler={onSelectDeviceHandler}
+                            />
+                            <Navbar.Experimets
+                                experimentList={experimentList}
+                                onSelectExperimentHandler={onSelectExperimentHandler}
+                            />
+                        </Navbar>
                     </Header.Collapse>
                 </Header>
             </div>

@@ -15,11 +15,6 @@ const getClassNameWithModifiers = ({
     return resultClassName
 };
 
-const toggleBodyClass = (className: string): boolean => {
-    return document.body.classList.toggle(className);
-};
-
 export {
     getClassNameWithModifiers,
-    toggleBodyClass
 }
