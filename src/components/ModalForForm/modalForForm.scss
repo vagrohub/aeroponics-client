@@ -15,17 +15,29 @@
     }
 
     &__header {
-        padding: 30px 30px 10px 30px;
+        padding: 20px;
         display: flex;
         justify-content: flex-end;
     }
 
     &__form {
-        padding: 10px 50px 30px 50px;
+        padding: 20px;
     }
 
     &--show {
         display: flex;
+    }
+
+    &__title {
+        margin-bottom: 25px;
+    }
+
+    &__send-form {
+        margin-top: 25px;
+    }
+
+    &__field-input + &__field-input {
+        margin-top: 20px;
     }
 }
 

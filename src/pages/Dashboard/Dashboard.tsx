@@ -1,15 +1,11 @@
 import { useState } from 'react';
 import { Device, Experimet, User } from '../../interface/User';
-import Details from '../../components/Details';
 import Header from '../../components/Header';
 import Main from '../../components/Main';
-import ActiveElement from '../../components/ActiveElement';
-import Modal from '../../components/Modal';
-import Input from '../../components/Input';
+import ModalForForm from '../../components/ModalForForm';
 import Navbar from '../../components/Navbar';
 import { useUserData } from './hooks';
 import './dashboard.scss';
-import SimpleButton from '../../components/SimpleButton';
 
 interface DashboardProps {
     isMobile: boolean;
@@ -108,113 +104,69 @@ const Dashboard = ({ isMobile, user }: DashboardProps) => {
                 </Main>
             </div>
 
-            <Modal
+            <ModalForForm
                 isMobile={isMobile}
                 isShow={hashIsShowModal.newDevice}
                 onClosedClickHandler={unPinBody}
             >
-                <Input isMobile={isMobile}>
-                    <Input.Label>Название</Input.Label>
+                <ModalForForm.FieldInput label='Название' type='Text'>
+                    Введите название нового устройства
+                </ModalForForm.FieldInput>
 
-                    <Input.Text>Введите название нового устройства</Input.Text>
-                </Input>
+                <ModalForForm.FieldInput label='Описание' type='Textarea'>
+                    Описание нового устройства
+                </ModalForForm.FieldInput>
 
-                <Input isMobile={isMobile}>
-                    <Input.Label>Описание</Input.Label>
+                <ModalForForm.SendForm>Сохранить</ModalForForm.SendForm>
+            </ModalForForm>
 
-                    <Input.Textarea>Описание нового устройства</Input.Textarea>
-                </Input>
-
-                <SimpleButton
-                    isMobile={isMobile}
-                    isFill={isMobile}
-                    isDisabled={false}
-                    text='сохранить'
-                    value='сохранить'
-                    onClick={() => console.log('work')}
-                />
-            </Modal>
-
-            <Modal
+            <ModalForForm
                 isMobile={isMobile}
                 isShow={hashIsShowModal.newExperiment}
                 onClosedClickHandler={unPinBody}
             >
-                <Input isMobile={isMobile}>
-                    <Input.Label>Название</Input.Label>
+                <ModalForForm.FieldInput label='Название' type='Text'>
+                    Введите название нового эксперимента
+                </ModalForForm.FieldInput>
 
-                    <Input.Text>Введите название нового эксперимента</Input.Text>
-                </Input>
+                <ModalForForm.FieldInput label='Описание' type='Textarea'>
+                    Описание нового эксперимента
+                </ModalForForm.FieldInput>
 
-                <Input isMobile={isMobile}>
-                    <Input.Label>Описание</Input.Label>
+                <ModalForForm.SendForm>Сохранить</ModalForForm.SendForm>
+            </ModalForForm>
 
-                    <Input.Textarea>Описание нового эксперимента</Input.Textarea>
-                </Input>
-
-                <SimpleButton
-                    isMobile={isMobile}
-                    isFill={isMobile}
-                    isDisabled={false}
-                    text='сохранить'
-                    value='сохранить'
-                    onClick={() => console.log('work')}
-                />
-            </Modal>
-
-            <Modal
+            <ModalForForm
                 isMobile={isMobile}
                 isShow={hashIsShowModal.currentDevice}
                 onClosedClickHandler={unPinBody}
             >
-                <Input isMobile={isMobile}>
-                    <Input.Label>Название</Input.Label>
+                <ModalForForm.FieldInput label='Название' type='Text'>
+                    {selectDevice?.name || ''}
+                </ModalForForm.FieldInput>
 
-                    <Input.Text>{selectDevice?.name || ''}</Input.Text>
-                </Input>
+                <ModalForForm.FieldInput label='Описание' type='Textarea'>
+                    {selectDevice?.description || ''}
+                </ModalForForm.FieldInput>
 
-                <Input isMobile={isMobile}>
-                    <Input.Label>Описание</Input.Label>
+                <ModalForForm.SendForm>Сохранить</ModalForForm.SendForm>
+            </ModalForForm>
 
-                    <Input.Textarea>{selectDevice?.description || ''}</Input.Textarea>
-                </Input>
-
-                <SimpleButton
-                    isMobile={isMobile}
-                    isFill={isMobile}
-                    isDisabled={false}
-                    text='сохранить'
-                    value='сохранить'
-                    onClick={() => console.log('work')}
-                />
-            </Modal>
-
-            <Modal
+            <ModalForForm
                 isMobile={isMobile}
                 isShow={hashIsShowModal.currentExperiment}
                 onClosedClickHandler={unPinBody}
             >
-                <Input isMobile={isMobile}>
-                    <Input.Label>Название</Input.Label>
+                <ModalForForm.FieldInput label='Название' type='Text'>
+                    {selectExperiment?.title || ''}
+                </ModalForForm.FieldInput>
 
-                    <Input.Text>{selectExperiment?.title || ''}</Input.Text>
-                </Input>
+                <ModalForForm.FieldInput label='Описание' type='Textarea'>
+                    {selectExperiment?.description || ''}
+                </ModalForForm.FieldInput>
 
-                <Input isMobile={isMobile}>
-                    <Input.Label>Описание</Input.Label>
-
-                    <Input.Textarea>{selectExperiment?.description || ''}</Input.Textarea>
-                </Input>
-
-                <SimpleButton
-                    isMobile={isMobile}
-                    isFill={isMobile}
-                    isDisabled={false}
-                    text='сохранить'
-                    value='сохранить'
-                    onClick={() => console.log('work')}
-                />
-            </Modal>
+                <ModalForForm.SendForm>Сохранить</ModalForForm.SendForm>
+            </ModalForForm>
         </div>
     );
 };

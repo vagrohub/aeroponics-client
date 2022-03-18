@@ -26,8 +26,8 @@ const App = () => {
                     path='/'
                     element={<Dashboard isMobile={isMobile} user={user} />}
                 />
-                <Route path='/auth' element={<Auth isMobile={false} />} />
-                <Route path='/registration' element={<Registration isMobile={false} />} />
+                <Route path='/auth' element={<Auth isMobile={isMobile} />} />
+                <Route path='/registration' element={<Registration isMobile={isMobile} />} />
             </Routes>
         </>
     );

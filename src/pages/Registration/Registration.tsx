@@ -8,7 +8,7 @@ const Registration = ({ isMobile }: RegistrationProps) => {
 
     return (
         <Admission isMobile={isMobile}>
-            <Admission.Title>Регистрация</Admission.Title>
+            <Admission.Title img={require('./registration.png')}>Регистрация</Admission.Title>
 
             <Admission.Login />
 

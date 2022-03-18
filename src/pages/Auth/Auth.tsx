@@ -8,7 +8,7 @@ const Auth = ({ isMobile }: AuthProps) => {
 
     return (
         <Admission isMobile={isMobile}>
-            <Admission.Title>Вход</Admission.Title>
+            <Admission.Title img={require('./enter.png')}>Вход</Admission.Title>
 
             <Admission.Login />
 

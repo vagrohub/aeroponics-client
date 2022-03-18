@@ -2,20 +2,24 @@ import { useEffect, useState } from 'react';
 import { getClassNameWithModifiers } from '../../utils/className';
 import Wrapper from '../Wrapper';
 import ClosedButton from '../ClosedButton';
-import './modal.scss';
+import SendForm from './subComponents/SendForm';
+import Title from './subComponents/Title';
+import FieldInput from './subComponents/FieldInput';
+import './modalForForm.scss';
+import ModalForFormContext from './subComponents/ModalForFormContext';
 
-interface ModalProps {
+interface ModalForFormProps {
     children: JSX.Element | JSX.Element[]
     isMobile: boolean;
     isShow: boolean;
     onClosedClickHandler?: Function;
 }
-const Modal = ({
+const ModalForForm = ({
     children,
     isMobile,
     isShow,
     onClosedClickHandler = () => { }
-}: ModalProps) => {
+}: ModalForFormProps) => {
     const [isModalShow, setIsModalShow] = useState(isShow);
     const className = getClassNameWithModifiers({
         className: 'modal',
@@ -46,7 +50,9 @@ const Modal = ({
                     </div>
 
                     <form className='modal__form'>
-                        {children}
+                        <ModalForFormContext.Provider value={{ isMobile }}>
+                            {children}
+                        </ModalForFormContext.Provider>
                     </form>
                 </Wrapper>
             </div>
@@ -54,4 +60,8 @@ const Modal = ({
     );
 };
 
-export default Modal;
+ModalForForm.SendForm = SendForm;
+ModalForForm.Title = Title;
+ModalForForm.FieldInput = FieldInput;
+
+export default ModalForForm;

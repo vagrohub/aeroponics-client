@@ -6,11 +6,15 @@
     justify-content: center;
 
     &__container {
-        width: Max(280px, 40%);
+        width: clamp(280px, 70%, 1000px);
     }
 
     &__title {
         margin-bottom: 20px;
+    }
+
+    &__password {
+        margin-top: 25px;
     }
 
     &__footer {
