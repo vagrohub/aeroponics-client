@@ -8,6 +8,10 @@ import './app.scss';
 
 const getWindowWidth = (): number => document.documentElement.clientWidth;
 
+(async function () {
+    
+})();
+
 const App = () => {
     const [windowWidth, setWindowWidth] = useState(getWindowWidth());
     const isMobile = windowWidth <= 858;
