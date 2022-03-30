@@ -1,12 +1,12 @@
-import { Experimet } from '../../interface/User';
+import { Experiment } from '../../interface/User';
 import Details from '../Details';
 import { useNavbarContext } from './hooks';
 
-interface ExperimetsProps {
-    experimentList: Experimet[];
+interface ExperimentsProps {
+    experimentList: Experiment[];
     onSelectExperimentHandler(id: string): void
 }
-const Experimets = ({ experimentList, onSelectExperimentHandler }: ExperimetsProps) => {
+const Experiments = ({ experimentList, onSelectExperimentHandler }: ExperimentsProps) => {
     const { isMobile } = useNavbarContext();
 
     return (
@@ -34,4 +34,4 @@ const Experimets = ({ experimentList, onSelectExperimentHandler }: ExperimetsPro
     );
 };
 
-export default Experimets;
+export default Experiments;

@@ -1,5 +1,5 @@
 import Devices from './Devices';
-import Experimets from './Experiments';
+import Experiments from './Experiments';
 import Settings from './Settings';
 import NavbarContext from './NavbarContext';
 
@@ -19,7 +19,7 @@ const Navbar = ({ children, isMobile }: NavbarProps) => {
 };
 
 Navbar.Devices = Devices;
-Navbar.Experimets = Experimets;
+Navbar.Experiments = Experiments;
 Navbar.Settings = Settings;
 
 export default Navbar;

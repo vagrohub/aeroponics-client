@@ -1,10 +1,10 @@
 import { createContext } from 'react';
-import { Device, Experimet, User } from '../../interface/User';
+import { Device, Experiment, User } from '../../interface/User';
 
 interface Context {
     isMobile: boolean,
     user: User | null,
-    selectedExperiment: Experimet | undefined,
+    selectedExperiment: Experiment | undefined,
     selectedDevice: Device | undefined
 };
 const MainContext = createContext<Context>({

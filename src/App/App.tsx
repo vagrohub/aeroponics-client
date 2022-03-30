@@ -6,9 +6,18 @@ import Dashboard from '../pages/Dashboard';
 import { user } from './data';
 import './app.scss';
 
+// import AuthService from '../serverServices/Auth';
+import Device from '../serverServices/Device';
+// import Experiment from '../serverServices/Experiment';
+// import User from '../serverServices/User';
+
 const getWindowWidth = (): number => document.documentElement.clientWidth;
 
 (async function () {
+    const device = new Device();
+    const response = await device.getList();
+    
+    console.log(response);
     
 })();
 

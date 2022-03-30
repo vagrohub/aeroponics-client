@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Device, Experimet, User } from '../../interface/User';
+import { Device, Experiment, User } from '../../interface/User';
 
 const ejectLastDeviceFromUser = (user: User): Device | undefined => {
     return user.deviceList.at(-1);
 };
 
-const ejectLastExperimentFromDevice = (device: Device): Experimet | undefined => {
+const ejectLastExperimentFromDevice = (device: Device): Experiment | undefined => {
     return device.currentExperiment;
 };
 
@@ -13,7 +13,7 @@ const ejectDeviceListFromUser = (user: User): Device[] => {
     return user.deviceList;
 };
 
-const ejectExperimentListFromDevice = (device: Device): Experimet[] => {
+const ejectExperimentListFromDevice = (device: Device): Experiment[] => {
     return [device.currentExperiment, ...device.cycles]
 };
 

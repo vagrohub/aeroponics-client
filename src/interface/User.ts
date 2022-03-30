@@ -11,7 +11,7 @@ interface Measurement {
     _id: string;
 }
 
-interface Experimet {
+interface Experiment {
     title: string;
     description: string;
     measurements: Measurement[];
@@ -23,8 +23,8 @@ interface Device {
     name: string;
     password: string;
     description: string;
-    cycles: Experimet[];
-    currentExperiment: Experimet;
+    cycles: Experiment[];
+    currentExperiment: Experiment;
     _id: string;
 }
 
@@ -37,7 +37,7 @@ interface User {
 
 export type {
     Measurement,
-    Experimet,
+    Experiment,
     Device,
     User
 }

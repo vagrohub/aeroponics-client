@@ -4,13 +4,13 @@ import PerformanceIndicators from './subComponents/PerformanceIndicators';
 import Greetings from './subComponents/Greetings';
 import MainContext from './MainContext';
 import './main.scss';
-import { Device, Experimet, User } from '../../interface/User';
+import { Device, Experiment, User } from '../../interface/User';
 
 interface MainProps {
     children: JSX.Element[] | JSX.Element;
     isMobile: boolean;
     user: User
-    selectedExperiment: Experimet | undefined
+    selectedExperiment: Experiment | undefined
     selectedDevice: Device | undefined
 }
 const Main = ({

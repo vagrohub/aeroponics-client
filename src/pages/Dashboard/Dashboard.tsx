@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState } from 'react';
-import { Device, Experimet, User } from '../../interface/User';
+import { Navigate } from 'react-router-dom';
+import { Device, Experiment, User } from '../../interface/User';
 import Header from '../../components/Header';
 import Main from '../../components/Main';
 import ModalForForm from '../../components/ModalForForm';
@@ -7,11 +9,23 @@ import Navbar from '../../components/Navbar';
 import { useUserData } from './hooks';
 import './dashboard.scss';
 
+
+// utils
+const pinBody = () => document.body.classList.add('body--overflow');
+const unPinBody = () => document.body.classList.remove('body--overflow');
+const togglePinBody = () => document.body.classList.toggle('body--overflow');
+
 interface DashboardProps {
     isMobile: boolean;
-    user: User;
+    user: User | undefined;
 }
 const Dashboard = ({ isMobile, user }: DashboardProps) => {
+    if (!user) {
+        return (
+            <Navigate to='/auth' replace />
+        );
+    }
+
     const {
         experimentList,
         setExperiment,
@@ -20,12 +34,6 @@ const Dashboard = ({ isMobile, user }: DashboardProps) => {
         setDevice,
         selectDevice
     } = useUserData(user);
-
-    // utils
-    const pinBody = () => document.body.classList.add('body--overflow');
-    const unPinBody = () => document.body.classList.remove('body--overflow');
-    const togglePinBody = () => document.body.classList.toggle('body--overflow');
-
 
     // mobile menu settings
     const [isCollapseHidden, setIsCollapseHidden] = useState(true)
@@ -44,7 +52,7 @@ const Dashboard = ({ isMobile, user }: DashboardProps) => {
 
     const onSelectExperimentHandler = (id: string) => {
         setExperiment(experimentList.find(
-            (experiment: Experimet) => experiment._id === id)
+            (experiment: Experiment) => experiment._id === id)
         );
     };
 
@@ -82,7 +90,7 @@ const Dashboard = ({ isMobile, user }: DashboardProps) => {
                                 deviceList={deviceList}
                                 onSelectDeviceHandler={onSelectDeviceHandler}
                             />
-                            <Navbar.Experimets
+                            <Navbar.Experiments
                                 experimentList={experimentList}
                                 onSelectExperimentHandler={onSelectExperimentHandler}
                             />
