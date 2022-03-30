@@ -24,10 +24,10 @@ class Experiment extends Services {
         }
     }
 
-    async getListByDeviceName(): Promise<Experiments[] | Error> {
+    async getListByDeviceName(name: string): Promise<Experiments[] | Error> {
         try {
             this.checkAuth();
-            const response = await fetch(`${this.host}${this.path}/list`, {
+            const response = await fetch(`${this.host}${this.path}/list/?name=${name}`, {
                 headers: {
                     Authorization: `Bearer ${this.getToken().token}`
                 }
