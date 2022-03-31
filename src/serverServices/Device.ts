@@ -1,7 +1,7 @@
 import Services from './Services';
-import { Error } from './interface';
+import ResponseError from './basic/ResponseError';
 
-interface Device {
+interface MainInfoDevice {
     name: string;
     description: string;
     id: string;
@@ -13,7 +13,7 @@ interface Status {
 class Device extends Services {
     path = '/device';
 
-    async getById(id: string): Promise<Device | Error> {
+    async getById(id: string): Promise<MainInfoDevice | ResponseError> {
         try {
             const response = await fetch(`${this.host}${this.path}/?id=${id}`);
             const serializeResponse = await response.json();
@@ -21,11 +21,11 @@ class Device extends Services {
 
             return serializeResponse;
         } catch (error: any) {
-            return { error: error.message || 'unknown error' };
+            return new ResponseError(error.message);
         }
     }
 
-    async getList(): Promise<Device[] | Error> {
+    async getList(): Promise<MainInfoDevice[] | ResponseError> {
         try {
             const response = await fetch(`${this.host}${this.path}/list`, {
                 headers: {
@@ -37,7 +37,7 @@ class Device extends Services {
 
             return serializeResponse;
         } catch (error: any) {
-            return { error: error.message || 'unknown error' };
+            return new ResponseError(error.message);
         }
     }
 
@@ -45,7 +45,7 @@ class Device extends Services {
         name: string, 
         password: string,
         description: string
-    ): Promise<Status | Error> {
+    ): Promise<Status | ResponseError> {
         try {
             const response = await fetch(`${this.host}${this.path}/new`, {
                 method: 'POST',
@@ -64,11 +64,11 @@ class Device extends Services {
 
             return serializeResponse;
         } catch (error: any) {
-            return { error: error.message || 'unknown error' };
+            return new ResponseError(error.message);
         }
     }
 
-    async stopCurrentExperiment(id: string): Promise<Status | Error> {
+    async stopCurrentExperiment(id: string): Promise<Status | ResponseError> {
         try {
             const response = await fetch(`${this.host}${this.path}/experiment`, {
                 method: 'POST',
@@ -85,7 +85,7 @@ class Device extends Services {
 
             return serializeResponse;
         } catch (error: any) {
-            return { error: error.message || 'unknown error' };
+            return new ResponseError(error.message);
         }
     }
 
@@ -107,9 +107,10 @@ class Device extends Services {
 
             return serializeResponse;
         } catch (error: any) {
-            return { error: error.message || 'unknown error' };
+            return new ResponseError(error.message);
         }
     }
 }
 
 export default Device;
+export type { MainInfoDevice }

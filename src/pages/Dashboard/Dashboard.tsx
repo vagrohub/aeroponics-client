@@ -1,13 +1,15 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { Device, Experiment, User } from '../../interface/User';
+import { Device, Experiment } from '../../interface/User';
 import Header from '../../components/Header';
 import Main from '../../components/Main';
 import ModalForForm from '../../components/ModalForForm';
 import Navbar from '../../components/Navbar';
-import { useUserData } from './hooks';
 import './dashboard.scss';
+import useAuthContext from '../../hooks/useAuthContext';
+import useUser from '../../hooks/useUser';
+import ResponseError from '../../serverServices/basic/ResponseError';
 
 
 // utils
@@ -17,23 +19,21 @@ const togglePinBody = () => document.body.classList.toggle('body--overflow');
 
 interface DashboardProps {
     isMobile: boolean;
-    user: User | undefined;
 }
-const Dashboard = ({ isMobile, user }: DashboardProps) => {
-    if (!user) {
-        return (
-            <Navigate to='/auth' replace />
-        );
+const Dashboard = ({ isMobile }: DashboardProps) => {
+    const authContext = useAuthContext();
+
+    if (!authContext.token) {
+        return <Navigate to='/auth' replace />
     }
 
-    const {
-        experimentList,
-        setExperiment,
-        selectExperiment,
-        deviceList,
-        setDevice,
-        selectDevice
-    } = useUserData(user);
+    useEffect(() => {
+        const response = await useUser();
+
+        if (response instanceof ResponseError) {
+            
+        }
+    });
 
     // mobile menu settings
     const [isCollapseHidden, setIsCollapseHidden] = useState(true)

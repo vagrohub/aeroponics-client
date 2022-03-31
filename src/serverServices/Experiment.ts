@@ -1,5 +1,5 @@
 import Services from './Services';
-import { Error } from './interface';
+import ResponseError from './basic/ResponseError';
 import { Experiment as IExperiment } from '../interface/User';
 
 interface ExperimentId {
@@ -13,18 +13,18 @@ interface Experiments {
 class Experiment extends Services {
     path = '/experiment';
 
-    async getById(id: string): Promise<IExperiment | Error> {
+    async getById(id: string): Promise<IExperiment | ResponseError> {
         try {
             const response = await fetch(`${this.host}${this.path}/?id=${id}`);
             const serializeResponse = await response.json();
 
             return serializeResponse;
         } catch (error: any) {
-            return { error: error.message || 'unknown error' };
+            return new ResponseError(error.message);
         }
     }
 
-    async getListByDeviceName(name: string): Promise<Experiments[] | Error> {
+    async getListByDeviceName(name: string): Promise<Experiments | ResponseError> {
         try {
             this.checkAuth();
             const response = await fetch(`${this.host}${this.path}/list/?name=${name}`, {
@@ -37,11 +37,11 @@ class Experiment extends Services {
 
             return serializeResponse;
         } catch (error: any) {
-            return { error: error.message || 'unknown error' };
+            return new ResponseError(error.message);
         }
     }
 
-    async createNew(title: string, description: string): Promise<ExperimentId | Error> {
+    async createNew(title: string, description: string): Promise<ExperimentId | ResponseError> {
         try {
             this.checkAuth();
             const response = await fetch(`${this.host}${this.path}/new`, {
@@ -60,11 +60,11 @@ class Experiment extends Services {
 
             return serializeResponse;
         } catch (error: any) {
-            return { error: error.message || 'unknown error' };
+            return new ResponseError(error.message);
         }
     }
 
-    async edditTitle(title: string, id: string): Promise<IExperiment | Error> {
+    async edditTitle(title: string, id: string): Promise<IExperiment | ResponseError> {
         try {
             this.checkAuth();
             const response = await fetch(`${this.host}${this.path}/title`, {
@@ -83,11 +83,11 @@ class Experiment extends Services {
 
             return serializeResponse;
         } catch (error: any) {
-            return { error: error.message || 'unknown error' };
+            return new ResponseError(error.message);
         }
     }
 
-    async edditDescription(description: string): Promise<IExperiment | Error> {
+    async edditDescription(description: string): Promise<IExperiment | ResponseError> {
         try {
             this.checkAuth();
             const response = await fetch(`${this.host}${this.path}/description`, {
@@ -105,9 +105,10 @@ class Experiment extends Services {
 
             return serializeResponse;
         } catch (error: any) {
-            return { error: error.message || 'unknown error' };
+            return new ResponseError(error.message);
         }
     }
 }
 
 export default Experiment;
+export type { Experiments, IExperiment };

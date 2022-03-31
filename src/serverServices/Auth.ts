@@ -1,6 +1,8 @@
-import { Error, Token } from './interface';
+import ResponseError from './basic/ResponseError';
+import Token from './basic/Token';
 import Services from './Services';
 
+type ResponseAuth = Token | ResponseError;
 class Auth extends Services {
     path = '/auth'
 
@@ -8,7 +10,7 @@ class Auth extends Services {
         email: string,
         username: string,
         password: string
-    ): Promise<Token | Error> {
+    ): Promise<ResponseAuth> {
         try {
             const response = await fetch(`${this.host}${this.path}/registration`, {
                 method: 'POST',
@@ -26,15 +28,17 @@ class Auth extends Services {
             if (serializeResponse.token) {
                 const { token } = serializeResponse;
                 localStorage.setItem('token', token);
+
+                return new Token(serializeResponse.token);
             }
 
-            return serializeResponse;
+            return new ResponseError(serializeResponse.error);
         } catch (error: any) {
-            return { error: error.message || 'unknown error'};
+            return new ResponseError(error.message);
         }
     }
 
-    async login(email: string, password: string): Promise<Token | Error> {
+    async login(email: string, password: string): Promise<ResponseAuth> {
         try {
             const response = await fetch(`${this.host}${this.path}/login`, {
                 method: 'POST',
@@ -51,11 +55,13 @@ class Auth extends Services {
             if (serializeResponse.token) {
                 const { token } = serializeResponse;
                 localStorage.setItem('token', token);
+
+                return new Token(serializeResponse.token);
             }
 
-            return serializeResponse;
+            return new ResponseError(serializeResponse.error);
         } catch (error: any) {
-            return { error: error.message || 'unknown error'};
+            return new ResponseError(error.message);
         }
     }
 
@@ -67,3 +73,4 @@ class Auth extends Services {
 }
 
 export default Auth;
+export type { ResponseAuth };

@@ -1,17 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import AuthProvider from '../hoc/AuthProvider';
 import Auth from '../pages/Auth';
 import Registration from '../pages/Registration';
 import Dashboard from '../pages/Dashboard';
 import { user } from './data';
 import './app.scss';
-import getAllUserInfo from '../serverServices/getAllUserInfo';
 
 const getWindowWidth = (): number => document.documentElement.clientWidth;
 
 (async function () {
-    const response = await getAllUserInfo();
-    console.log(response);
+    
 })();
 
 const App = () => {
@@ -26,7 +25,7 @@ const App = () => {
     }, []);
 
     return (
-        <>
+        <AuthProvider>
             <Routes>
                 <Route
                     path='/'
@@ -35,7 +34,7 @@ const App = () => {
                 <Route path='/auth' element={<Auth isMobile={isMobile} />} />
                 <Route path='/registration' element={<Registration isMobile={isMobile} />} />
             </Routes>
-        </>
+        </AuthProvider>
     );
 };
 

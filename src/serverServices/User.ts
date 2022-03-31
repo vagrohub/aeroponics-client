@@ -1,4 +1,4 @@
-import { Error } from './interface';
+import ResponseError from './basic/ResponseError';
 import Services from './Services';
 
 interface MainInfoUser {
@@ -8,7 +8,7 @@ interface MainInfoUser {
 class User extends Services {
     path = '/user'
 
-    async getData(): Promise<MainInfoUser | Error> {
+    async getData(): Promise<MainInfoUser | ResponseError> {
         try {
             this.checkAuth();
             const response = await fetch(`${this.host}${this.path}/`, {
@@ -18,10 +18,13 @@ class User extends Services {
             });
             const serializeResponse = await response.json();
 
+            if (serializeResponse.error) {
+                return new ResponseError(serializeResponse.error);
+            }
 
-            return serializeResponse;
+            return serializeResponse.user;
         } catch (error: any) {
-            return { error: error.message || 'unknown error'};
+            return new ResponseError(error.message);
         }
     }
 
@@ -67,3 +70,4 @@ class User extends Services {
 }
 
 export default User;
+export type { MainInfoUser }
